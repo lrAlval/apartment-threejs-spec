@@ -26,8 +26,8 @@ export function AutomationBridge(state: ViewState) {
           rooms: data.rooms.map(({ id, name }) => ({ id, name })),
           walls: data.walls.length,
           openings: data.openings.length,
-          labels: document.querySelectorAll('.room-label').length,
-          dimensions: document.querySelectorAll('.dimension').length,
+          labels: document.querySelectorAll('.room-label:not([hidden])').length,
+          dimensions: document.querySelectorAll('.dimension:not([hidden])').length,
           render: {
             frames: frames.current,
             calls: gl.info.render.calls,
