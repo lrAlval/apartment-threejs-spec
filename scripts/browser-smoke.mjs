@@ -19,7 +19,12 @@ export async function runSmoke({ url, out, headed, createClient }) {
       // Never take over or close an agent's interactive session.
       const client = await createClient(`apartment-test-${process.pid}-${name}`, headed);
       const check = async (name, action) => {
-        try { await action(); profile.checks.push({ name, ok: true }); }
+        try {
+          await action();
+          const { errors } = await client.browser('errors');
+          assert.deepEqual(errors, [], `Page errors after: ${name}`);
+          profile.checks.push({ name, ok: true });
+        }
         catch (error) { profile.checks.push({ name, ok: false, error: error.message }); throw error; }
       };
       const capture = async label => {
