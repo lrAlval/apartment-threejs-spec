@@ -113,6 +113,8 @@ export async function runSmoke({ url, out, headed, createClient }) {
         profile.error = error.message;
         if (opened) {
           try { await capture('failure'); } catch { /* Keep the original failure. */ }
+          try { profile.state = await client.inspect(); } catch { /* App may not have loaded. */ }
+          try { profile.console = await client.browser('console'); } catch { /* Browser may have exited. */ }
           try { profile.errors = await client.browser('errors'); } catch { /* Browser may have exited. */ }
         }
       } finally {

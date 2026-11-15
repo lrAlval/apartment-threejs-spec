@@ -74,8 +74,7 @@ export async function createClient(session, headed = false) {
         await browser('find', 'label', layerNames[name], 'click');
       }
       let condition = `window.apartment.getState().layers.${name} === ${value === 'on'}`;
-      // Html commits through separate DOM roots: wait for their actual content,
-      // rather than assuming the React state flag means every overlay has updated.
+      // Wait for actual overlay content as well as the view state flag.
       if (name !== 'ceiling') {
         const field = name === 'labels' ? 'labels' : 'dimensions';
         condition += ` && window.apartment.getState().${field} === ${value === 'on' ? 'window.apartment.getState().rooms.length' : '0'}`;
