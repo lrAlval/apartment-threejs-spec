@@ -8,8 +8,9 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "validate": "node scripts/validate.mjs",
-    "test:e2e": "playwright test",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e": "node scripts/apartment.mjs test",
+    "apartment": "node scripts/apartment.mjs",
+    "test:cli": "node --test scripts/browser-smoke.test.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.0",
@@ -19,11 +20,11 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.65.1",
     "@types/node": "^26.6.6",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/three": "^0.180.0",
+    "agent-browser": "0.43.0",
     "typescript": "^5.9.0",
     "vite": "^7.0.0"
   }
