@@ -18,7 +18,7 @@ Orbit with drag, pan with right drag, zoom with scroll/pinch. Choose 2D floor pl
 
 ## Cloud browser testing and live previews
 
-Every push to this PR branch and every PR targeting `main` runs `.github/workflows/browser-tests.yml` on GitHub-hosted Ubuntu. It validates geometry, builds the production app, then tests desktop and mobile Chromium using software WebGL (no cloud GPU required).
+Every PR targeting `main` (including updates to this PR) and every push to `main` triggers `.github/workflows/browser-tests.yml` on GitHub-hosted Ubuntu. It validates geometry, builds the production app, then tests desktop and mobile Chromium using software WebGL (no cloud GPU required).
 
 The browser test requires actual geometry draw calls, exercises 2D/3D views, layers, orbit and zoom, checks for browser errors and horizontal overflow, and checks that the source trace is available. Each device produces perspective, floor-plan, ceiling and camera screenshots. These are review evidence, not approved visual baselines or proof of architectural accuracy. Mobile Chromium emulation does not verify Safari or physical-device GPU performance.
 
