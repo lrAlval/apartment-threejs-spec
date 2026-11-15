@@ -73,7 +73,14 @@ export async function createClient(session, headed = false) {
       if ((await inspect()).layers[name] !== (value === 'on')) {
         await browser('find', 'label', layerNames[name], 'click');
       }
-      return settled(`window.apartment.getState().layers.${name} === ${value === 'on'}`);
+      let condition = `window.apartment.getState().layers.${name} === ${value === 'on'}`;
+      // Html commits through separate DOM roots: wait for their actual content,
+      // rather than assuming the React state flag means every overlay has updated.
+      if (name !== 'ceiling') {
+        const field = name === 'labels' ? 'labels' : 'dimensions';
+        condition += ` && window.apartment.getState().${field} === ${value === 'on' ? 'window.apartment.getState().rooms.length' : '0'}`;
+      }
+      return settled(condition);
     },
     async camera(position) {
       if (position.length !== 3 || !position.every(Number.isFinite)) throw new Error('camera requires three finite numbers');
