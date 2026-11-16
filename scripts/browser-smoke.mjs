@@ -108,7 +108,13 @@ export async function runSmoke({ url, out, headed, createClient }) {
           assert.equal(state.bathroomReturn.a, 'U'); assert.equal(state.bathroomReturn.b, 'T');
         });
         await check('eye-level walkthrough, keyboard movement, reset and overview restoration', async () => {
+          // Remount controls to discard momentum from the preceding orbit/zoom test.
+          await client.view('2d');
+          await client.view('3d');
+          const expectedPosition = [9, 6, 8];
+          await client.camera(expectedPosition);
           const before = await client.inspect();
+          assert(before.camera.position.every((v,i)=>Math.abs(v-expectedPosition[i])<.01));
           const state = await client.view('walk');
           assert.equal(state.view, 'walk'); assert.equal(state.render.ceilingMeshes, 5);
           assert.equal(state.camera.position[1], 1.6); assert.equal(state.labels, 0);
@@ -130,7 +136,8 @@ export async function runSmoke({ url, out, headed, createClient }) {
           const restored = await client.inspect();
           assert.equal(restored.layers.ceiling, before.layers.ceiling);
           assert.equal(restored.labels, before.labels);
-          assert(restored.camera.position.every((v,i)=>Math.abs(v-before.camera.position[i])<.08));
+          assert(restored.camera.position.every((v,i)=>Math.abs(v-expectedPosition[i])<.01));
+          assert(restored.camera.target.every((v,i)=>Math.abs(v-before.camera.target[i])<.01));
         });
         await check('walkthrough drag-look and held movement pad', async () => {
           await client.view('walk');
