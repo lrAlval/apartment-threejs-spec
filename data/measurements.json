@@ -349,12 +349,12 @@
     },
     {
       "id": "bedroom-top",
-      "a": "N",
+      "a": "O",
       "b": "R",
       "thickness": 0.1,
       "height": 2.4,
       "status": "estimated",
-      "source": "Owner annotation image.png: the former opening is a solid wall."
+      "source": "Owner clarification: bedroom window belongs on the balcony-shared O-P edge; the former door near R remains filled. Start at O to avoid duplicating exterior-13 on N-O."
     },
     {
       "id": "bedroom-east",
@@ -476,14 +476,14 @@
     },
     {
       "id": "bedroom-window",
-      "wall": "exterior-11",
-      "offset": 1.15,
-      "width": 1.75,
+      "wall": "bedroom-top",
+      "offset": 0.05,
+      "width": 0.76,
       "height": 1.2,
       "sill": 0.9,
       "type": "window",
       "status": "estimated",
-      "source": "Owner annotation image(2).png confirms the south/opposite wall. Centered span is estimated; existing 1.75 m width, 1.20 m height and 0.90 m sill remain provisional."
+      "source": "Owner clarification: window on bedroom/balcony shared edge O-P, replacing the misinterpreted south-wall placement. Provisional width 0.76 m is centered within the traced 0.86 m shared edge; height 1.20 m and sill 0.90 m remain defaults."
     }
   ],
   "fixtures": [
@@ -671,6 +671,6 @@
     "verified": "Only printed dimensions and area; coordinates are NOT verified",
     "estimated": "Plan page 1 pixel tracing calibrated independently by 3.37, 2.81 and 4.94 m dimensions; coordinates rounded to 0.01 m for editability, not survey precision",
     "default": "Heights, wall thicknesses, door widths and fixture elevations are visualization assumptions",
-    "ownerFeedback": "The three owner-annotated screenshots override the initial opening trace. Wall selection for the bedroom window and solid-wall corrections are owner-confirmed; coordinates, window span and door dimensions retain estimated/default status."
+    "ownerFeedback": "Owner-confirmed corrections: former bedroom door and west-window locations are solid; bedroom window belongs on balcony-shared edge O-P. The earlier south-wall interpretation was incorrect. Coordinates, window span and door dimensions remain estimated/default."
   }
 }
