@@ -1,0 +1,41 @@
+name: Browser tests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: browser-tests-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test:cli
+      - run: npm run validate
+      - run: npm run build
+      - run: npx agent-browser install --with-deps
+      - run: npm run apartment -- test
+        env:
+          AGENT_BROWSER_ARGS: --use-angle=swiftshader,--enable-unsafe-swiftshader
+      - name: Upload JSON report and review screenshots
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-report-${{ github.run_attempt }}
+          path: test-results/browser/
+          retention-days: 14

@@ -1,0 +1,662 @@
+{
+  "schemaVersion": 1,
+  "metadata": {
+    "apartment": "DPTO 309\u20132009, 2209, 2309, 2509",
+    "source": "Departamento_09_Plano_Con_Cotas.pdf",
+    "area": {
+      "value": 41.64,
+      "status": "verified",
+      "definition": "Both roofed and total area printed; inclusion of walls/shafts uncertain"
+    },
+    "units": "metres"
+  },
+  "coordinateSystem": {
+    "horizontal": [
+      "X",
+      "Z"
+    ],
+    "vertical": "Y",
+    "floor": 0,
+    "origin": "Bedroom west wall aligned with source pixel (190,166), north at negative Z",
+    "traceScalePixelsPerMetre": 159.5
+  },
+  "defaults": {
+    "ceilingHeight": 2.4,
+    "interiorWall": 0.1,
+    "exteriorWall": 0.15,
+    "windowHeight": 1.2,
+    "windowSill": 0.9,
+    "parapetHeight": 1.2,
+    "status": "default"
+  },
+  "vertices": {
+    "A": [
+      1.12,
+      0
+    ],
+    "B": [
+      6.27,
+      0
+    ],
+    "C": [
+      6.97,
+      0.66
+    ],
+    "D": [
+      6.97,
+      3.0
+    ],
+    "E": [
+      7.64,
+      3.0
+    ],
+    "F": [
+      7.64,
+      4.55
+    ],
+    "G": [
+      7.03,
+      4.55
+    ],
+    "H": [
+      7.03,
+      5.86
+    ],
+    "I": [
+      5.25,
+      5.86
+    ],
+    "J": [
+      5.25,
+      6.02
+    ],
+    "K": [
+      4.05,
+      6.02
+    ],
+    "L": [
+      4.05,
+      5.86
+    ],
+    "M": [
+      0,
+      5.86
+    ],
+    "N": [
+      0,
+      3.0
+    ],
+    "O": [
+      1.12,
+      3.0
+    ],
+    "P": [
+      1.98,
+      3.0
+    ],
+    "Q": [
+      1.98,
+      0
+    ],
+    "R": [
+      4.05,
+      3.0
+    ],
+    "S": [
+      4.05,
+      3.9
+    ],
+    "T": [
+      5.25,
+      3.9
+    ],
+    "U": [
+      5.25,
+      3.0
+    ]
+  },
+  "perimeter": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O"
+  ],
+  "rooms": [
+    {
+      "id": "living",
+      "name": "Living / dining",
+      "polygon": [
+        "Q",
+        "B",
+        "C",
+        "D",
+        "U",
+        "T",
+        "S",
+        "R",
+        "P"
+      ],
+      "label": [
+        4.3,
+        1.5
+      ],
+      "color": "#ded6c9",
+      "status": "estimated"
+    },
+    {
+      "id": "bedroom",
+      "name": "Main bedroom",
+      "polygon": [
+        "N",
+        "P",
+        "R",
+        "S",
+        "L",
+        "M"
+      ],
+      "label": [
+        1.8,
+        4.5
+      ],
+      "color": "#d4c6b2",
+      "status": "estimated"
+    },
+    {
+      "id": "bathroom",
+      "name": "Bathroom",
+      "polygon": [
+        "S",
+        "T",
+        "J",
+        "K"
+      ],
+      "label": [
+        4.65,
+        5
+      ],
+      "color": "#b8cccf",
+      "status": "estimated"
+    },
+    {
+      "id": "kitchen",
+      "name": "Integrated kitchen",
+      "polygon": [
+        "U",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "T"
+      ],
+      "label": [
+        6.35,
+        4.2
+      ],
+      "color": "#d5d9c8",
+      "status": "estimated"
+    },
+    {
+      "id": "balcony",
+      "name": "Balcony",
+      "polygon": [
+        "A",
+        "Q",
+        "P",
+        "O"
+      ],
+      "label": [
+        1.55,
+        1.5
+      ],
+      "color": "#bdc5b2",
+      "status": "estimated"
+    }
+  ],
+  "walls": [
+    {
+      "id": "exterior-0",
+      "a": "A",
+      "b": "Q",
+      "thickness": 0.15,
+      "height": 1.2,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-1",
+      "a": "B",
+      "b": "C",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-2",
+      "a": "C",
+      "b": "D",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-3",
+      "a": "D",
+      "b": "E",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-4",
+      "a": "E",
+      "b": "F",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-5",
+      "a": "F",
+      "b": "G",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-6",
+      "a": "G",
+      "b": "H",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-7",
+      "a": "H",
+      "b": "I",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-8",
+      "a": "I",
+      "b": "J",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-9",
+      "a": "J",
+      "b": "K",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-10",
+      "a": "K",
+      "b": "L",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-11",
+      "a": "L",
+      "b": "M",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-12",
+      "a": "M",
+      "b": "N",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-13",
+      "a": "N",
+      "b": "O",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "exterior-14",
+      "a": "O",
+      "b": "A",
+      "thickness": 0.15,
+      "height": 1.2,
+      "status": "estimated"
+    },
+    {
+      "id": "bedroom-top",
+      "a": "N",
+      "b": "R",
+      "thickness": 0.1,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "bedroom-east",
+      "a": "S",
+      "b": "L",
+      "thickness": 0.1,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "bath-top",
+      "a": "S",
+      "b": "T",
+      "thickness": 0.1,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "bath-east",
+      "a": "T",
+      "b": "I",
+      "thickness": 0.1,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "balcony-glazing",
+      "a": "Q",
+      "b": "P",
+      "thickness": 0.1,
+      "height": 2.4,
+      "status": "estimated"
+    },
+    {
+      "id": "living-north",
+      "a": "Q",
+      "b": "B",
+      "thickness": 0.15,
+      "height": 2.4,
+      "status": "estimated"
+    }
+  ],
+  "openings": [
+    {
+      "id": "entrance",
+      "wall": "exterior-2",
+      "offset": 1.44,
+      "width": 0.9,
+      "height": 2.1,
+      "sill": 0,
+      "type": "door",
+      "connects": [
+        "outside",
+        "living"
+      ],
+      "status": "default"
+    },
+    {
+      "id": "bedroom-door",
+      "wall": "bedroom-top",
+      "offset": 3.25,
+      "width": 0.8,
+      "height": 2.1,
+      "sill": 0,
+      "type": "door",
+      "connects": [
+        "living",
+        "bedroom"
+      ],
+      "status": "default"
+    },
+    {
+      "id": "bath-door",
+      "wall": "bath-top",
+      "offset": 0.02,
+      "width": 0.7,
+      "height": 2.1,
+      "sill": 0,
+      "type": "door",
+      "connects": [
+        "living",
+        "bathroom"
+      ],
+      "status": "default"
+    },
+    {
+      "id": "balcony-access",
+      "wall": "balcony-glazing",
+      "offset": 2.1,
+      "width": 0.8,
+      "height": 2.1,
+      "sill": 0,
+      "type": "door",
+      "connects": [
+        "living",
+        "balcony"
+      ],
+      "status": "default"
+    },
+    {
+      "id": "living-glass",
+      "wall": "balcony-glazing",
+      "offset": 0.08,
+      "width": 2.0,
+      "height": 2.1,
+      "sill": 0,
+      "type": "window",
+      "status": "estimated"
+    },
+    {
+      "id": "bedroom-window",
+      "wall": "exterior-12",
+      "offset": 1.0,
+      "width": 1.75,
+      "height": 1.2,
+      "sill": 0.9,
+      "type": "window",
+      "status": "estimated"
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "sink",
+      "room": "kitchen",
+      "position": [
+        5.65,
+        0.48,
+        3.35
+      ],
+      "size": [
+        0.58,
+        0.95,
+        0.6
+      ],
+      "kind": "sink",
+      "status": "estimated"
+    },
+    {
+      "id": "hob",
+      "room": "kitchen",
+      "position": [
+        5.65,
+        0.45,
+        4.3
+      ],
+      "size": [
+        0.58,
+        0.9,
+        1.15
+      ],
+      "kind": "hob",
+      "status": "estimated"
+    },
+    {
+      "id": "fridge",
+      "room": "kitchen",
+      "position": [
+        7.25,
+        0.85,
+        3.95
+      ],
+      "size": [
+        0.6,
+        1.7,
+        0.65
+      ],
+      "kind": "cabinet",
+      "status": "estimated"
+    },
+    {
+      "id": "washer",
+      "room": "kitchen",
+      "position": [
+        5.65,
+        0.45,
+        5.45
+      ],
+      "size": [
+        0.6,
+        0.9,
+        0.6
+      ],
+      "kind": "washer",
+      "status": "estimated"
+    },
+    {
+      "id": "laundry",
+      "room": "kitchen",
+      "position": [
+        6.75,
+        0.48,
+        5.45
+      ],
+      "size": [
+        0.5,
+        0.95,
+        0.6
+      ],
+      "kind": "sink",
+      "status": "estimated"
+    },
+    {
+      "id": "toilet",
+      "room": "bathroom",
+      "position": [
+        4.8,
+        0.22,
+        4.85
+      ],
+      "size": [
+        0.4,
+        0.44,
+        0.65
+      ],
+      "kind": "toilet",
+      "status": "estimated"
+    },
+    {
+      "id": "basin",
+      "room": "bathroom",
+      "position": [
+        4.9,
+        0.43,
+        4.15
+      ],
+      "size": [
+        0.45,
+        0.86,
+        0.38
+      ],
+      "kind": "sink",
+      "status": "estimated"
+    },
+    {
+      "id": "shower",
+      "room": "bathroom",
+      "position": [
+        4.65,
+        0.04,
+        5.65
+      ],
+      "size": [
+        1.05,
+        0.08,
+        0.65
+      ],
+      "kind": "shower",
+      "status": "estimated"
+    }
+  ],
+  "balcony": {
+    "polygon": [
+      "A",
+      "Q",
+      "P",
+      "O"
+    ],
+    "access": "balcony-access",
+    "parapetWalls": [
+      "exterior-0",
+      "exterior-14"
+    ],
+    "status": "estimated"
+  },
+  "dimensions": [
+    {
+      "id": "bedroom-width",
+      "value": 3.37,
+      "status": "verified",
+      "source": "Source PDF page 1; transcription page 2",
+      "description": "Clear bedroom horizontal dimension; closet excluded"
+    },
+    {
+      "id": "bedroom-depth",
+      "value": 2.81,
+      "status": "verified",
+      "source": "Source PDF page 1; transcription page 2",
+      "description": "Clear bedroom vertical dimension"
+    },
+    {
+      "id": "living-width",
+      "value": 4.94,
+      "status": "verified",
+      "source": "Source PDF page 1; transcription page 2",
+      "description": "Living horizontal dimension to east wall"
+    },
+    {
+      "id": "dining-return",
+      "value": 1.24,
+      "status": "verified",
+      "source": "Source PDF page 1; transcription page 2",
+      "description": "Vertical return beside dining"
+    },
+    {
+      "id": "entrance-dimension",
+      "value": 1,
+      "status": "verified",
+      "source": "Source PDF page 1; transcription page 2",
+      "description": "Printed entrance vertical dimension, not confirmed door-leaf width"
+    }
+  ],
+  "provenance": {
+    "verified": "Only printed dimensions and area; coordinates are NOT verified",
+    "estimated": "Plan page 1 pixel tracing calibrated independently by 3.37, 2.81 and 4.94 m dimensions; coordinates rounded to 0.01 m for editability, not survey precision",
+    "default": "Heights, wall thicknesses, door widths and fixture elevations are visualization assumptions"
+  }
+}
