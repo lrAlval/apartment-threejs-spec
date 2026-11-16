@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { withTouch } from './browser-touch.mjs';
 
 export async function runSmoke({ url, out, headed, createClient }) {
   const report = { ok: false, profiles: [], artifacts: out };
@@ -99,6 +100,79 @@ export async function runSmoke({ url, out, headed, createClient }) {
           await client.wait(`Math.abs(Math.hypot(...window.apartment.getState().camera.position.map((v,i)=>v-${JSON.stringify(target)}[i]))-${distance})>0.1`);
         });
         await capture('camera');
+        await check('full-span sliding bedroom window and bathroom approach return', async () => {
+          const state = await client.inspect();
+          assert.equal(state.bedroomWindow.operation, 'sliding');
+          assert.equal(state.bedroomWindow.panels, 2);
+          assert(Math.abs(state.bedroomWindow.width - 2.83) < 1e-6);
+          assert.equal(state.bathroomReturn.a, 'U'); assert.equal(state.bathroomReturn.b, 'T');
+        });
+        await check('eye-level walkthrough, keyboard movement, reset and overview restoration', async () => {
+          const before = await client.inspect();
+          const state = await client.view('walk');
+          assert.equal(state.view, 'walk'); assert.equal(state.render.ceilingMeshes, 5);
+          assert.equal(state.camera.position[1], 1.6); assert.equal(state.labels, 0);
+          await client.browser('keydown', 'w');
+          try { await client.wait('window.apartment.getState().camera.position[0] < 6.1'); }
+          finally { await client.browser('keyup', 'w'); }
+          const moved = (await client.inspect()).camera.position;
+          assert(moved[0] < 6.1); assert.equal(moved[1], 1.6);
+          await client.browser('find', 'role', 'button', 'click', '--name', 'Reset position');
+          await client.wait('Math.abs(window.apartment.getState().camera.position[0]-6.35)<0.01');
+          await client.browser('keydown', 'd');
+          try { await client.wait('window.apartment.getState().camera.position[2]<2.15'); }
+          finally { await client.browser('keyup', 'd'); }
+          await client.browser('find', 'role', 'button', 'click', '--name', 'Reset position');
+          await client.wait('Math.abs(window.apartment.getState().camera.position[2]-2.35)<0.01');
+          await capture('walkthrough');
+          await client.browser('find', 'role', 'button', 'click', '--name', 'Exit walkthrough');
+          await client.wait("window.apartment.getState().view === '3d'");
+          const restored = await client.inspect();
+          assert.equal(restored.layers.ceiling, before.layers.ceiling);
+          assert.equal(restored.labels, before.labels);
+          assert(restored.camera.position.every((v,i)=>Math.abs(v-before.camera.position[i])<.08));
+        });
+        await check('walkthrough drag-look and held movement pad', async () => {
+          await client.view('walk');
+          const bounds = await client.evaluate('(() => {const r=document.querySelector("canvas").getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height};})()');
+          const rotation = (await client.inspect()).camera.rotation;
+          const x=bounds.x+bounds.width*.5, y=bounds.y+bounds.height*.35;
+          await client.browser('mouse','move',String(x),String(y));
+          await client.browser('mouse','down','left');
+          try { await client.browser('mouse','move',String(x+50),String(y+20),'--steps','6'); }
+          finally { await client.browser('mouse','up','left'); }
+          assert((await client.inspect()).camera.rotation.some((v,i)=>typeof v==='number' && Math.abs(v-rotation[i])>.01));
+          await client.browser('find','role','button','click','--name','Reset position');
+          const pad=await client.evaluate('(() => {const r=document.querySelector("[aria-label=\\"Walk forward\\"]").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})()');
+          await client.browser('mouse','move',String(pad.x),String(pad.y));
+          await client.browser('mouse','down','left');
+          try { await client.wait('window.apartment.getState().camera.position[0]<6.1'); }
+          finally { await client.browser('mouse','up','left'); }
+          await client.browser('find','role','button','click','--name','Exit walkthrough');
+          await client.wait("window.apartment.getState().view === '3d'");
+        });
+        if (name === 'narrow') await check('native multi-touch movement and look release cleanly', async () => {
+          await client.view('walk');
+          const points = await client.evaluate('(() => {const p=document.querySelector(".walk-pad button").getBoundingClientRect();return {pad:{x:p.x+p.width/2,y:p.y+p.height/2},look:{x:180,y:200}};})()');
+          await withTouch(client, async touch => {
+            const pad={id:1,...points.pad},look={id:2,...points.look};
+            await touch('touchStart',[pad]);
+            await client.wait('window.apartment.getState().camera.position[0]<6.1');
+            const rotation=(await client.inspect()).camera.rotation;
+            await touch('touchStart',[pad,look]);
+            await touch('touchMove',[pad,{...look,x:look.x+60,y:look.y+15}]);
+            await client.wait(`Math.abs(window.apartment.getState().camera.rotation[1]-${rotation[1]})>.05`);
+            await touch('touchEnd',[]);
+            const stopped=await client.inspect();
+            await client.wait(`window.apartment.getState().render.frames>${stopped.render.frames+8}`);
+            const after=await client.inspect();
+            assert(after.camera.position.every((v,i)=>Math.abs(v-stopped.camera.position[i])<.01));
+            assert.equal(after.horizontalOverflow,false);
+          });
+          await capture('touch-walkthrough');
+          await client.browser('find','role','button','click','--name','Exit walkthrough');
+          await client.wait("window.apartment.getState().view === '3d'");
+        });
         await check('source trace, responsive layout and healthy renderer', async () => {
           assert.equal(await client.evaluate('(async()=>{const r=await fetch("/source-plan.svg");return r.ok && (await r.text()).includes("<svg");})()'), true);
           const state = await client.inspect();

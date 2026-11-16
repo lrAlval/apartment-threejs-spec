@@ -28,7 +28,14 @@ for(const s of d.soffits){
 assert(d.defaults.frameWidth>0&&d.defaults.frameDepth>0);
 for(const w of d.walls){
  if(w.heightRooms)assert.equal(w.height,Math.max(...w.heightRooms.map(id=>{const room=d.rooms.find(r=>r.id===id);assert(room,`Unknown wall room ${id}`);return room.ceiling.height})),`Wall/ceiling mismatch ${w.id}`);const a=p(w.a),b=p(w.b),len=Math.hypot(a[0]-b[0],a[1]-b[1]);assert(len>0);const os=d.openings.filter(o=>o.wall===w.id).sort((a,b)=>a.offset-b.offset);let end=0;for(const o of os){assert(o.offset>=end-1e-8&&o.offset+o.width<=len+1e-8,`Invalid opening ${o.id}`);assert(o.sill+o.height<=w.height);end=o.offset+o.width}}
-for(const o of d.openings)assert(d.walls.some(w=>w.id===o.wall));
+for(const o of d.openings){
+ const wall=d.walls.find(w=>w.id===o.wall);assert(wall,`Unknown opening wall ${o.id}`);
+ assert(Number.isFinite(o.width)&&o.width>2*d.defaults.frameWidth,`Invalid frame fit ${o.id}`);
+ if(o.operation==='sliding')assert(Number.isInteger(o.panels)&&o.panels===2,`Unsupported sliding panel count ${o.id}`);
+ const a=p(wall.a),b=p(wall.b),length=Math.hypot(b[0]-a[0],b[1]-a[1]);
+ const center=[a[0]+(b[0]-a[0])*(o.offset+o.width/2)/length,a[1]+(b[1]-a[1])*(o.offset+o.width/2)/length];
+ for(const s of d.soffits){const sa=p(s.a),sb=p(s.b);if(center[0]>=sa[0]-1e-8&&center[0]<=sb[0]+1e-8&&center[1]>=sa[1]-1e-8&&center[1]<=sa[1]+s.depth+1e-8)assert(o.sill+o.height<=s.underside+1e-8,`Soffit blocks opening ${o.id}`);}
+}
 for(let i=0;i<d.rooms.length;i++)for(let j=i+1;j<d.rooms.length;j++){let a=d.rooms[i],b=d.rooms[j];for(let k=0;k<a.polygon.length;k++)for(let l=0;l<b.polygon.length;l++)assert(!intersect(p(a.polygon[k]),p(a.polygon[(k+1)%a.polygon.length]),p(b.polygon[l]),p(b.polygon[(l+1)%b.polygon.length])),`Rooms cross: ${a.id}/${b.id}`)}
 const reached=new Set(['outside']);for(let i=0;i<10;i++)for(const o of d.openings)if(o.connects?.some(r=>reached.has(r)))o.connects.forEach(r=>reached.add(r));
 assert(['living','bedroom','bathroom','balcony'].every(r=>reached.has(r)));

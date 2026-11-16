@@ -26,6 +26,10 @@ npm run apartment -- view 2d
 npm run apartment -- layer measurements on
 npm run apartment -- view 3d
 npm run apartment -- camera 10 8 10
+npm run apartment -- view walk
+# Drag to look; W A S D / arrows or hold movement-pad buttons.
+# Reset position and Exit walkthrough are available in the UI.
+npm run apartment -- view 3d
 npm run apartment -- screenshot test-results/my-view.png
 npm run apartment -- browser snapshot -i
 npm run apartment -- close
@@ -57,7 +61,8 @@ Raw element refs last only while their elements survive. Take a fresh snapshot a
 `window.apartment` exposes `version: 1`, `getState()` and `setCamera([x,y,z])`.
 
 - State includes rooms, opening/wall counts, view, layers, camera position/target, actual WebGL draw statistics and context health.
-- View/layer CLI commands use the existing UI. Camera coordinates are metres and require 3D view.
+- View/layer CLI commands use the existing UI. `view walk` enters eye-level walkthrough; `view 3d` or `view 2d` exits it. Camera positioning requires overview 3D; layer changes require exiting walkthrough.
+- Walkthrough forces ceilings on, hides labels/measurements, and restores prior view/layers/camera on exit. Drag to look works on mouse and touch; movement buttons support held pointers and keyboard activation. Optional mouse lock requires a user click; Esc releases it. Focus/visibility loss clears held movement. Reset returns to the entrance-side starting point and refocuses the canvas so keyboard movement continues. Keyboard input accepts physical codes and key-only events. The narrow profile additionally injects native CDP multi-touch input to exercise simultaneous movement/look and release cleanup.
 - The API is intentionally available in preview builds. It has no backend, file access or persistence.
 
 ## Repeatable checks
@@ -80,7 +85,7 @@ npm run apartment -- test --url https://YOUR-PREVIEW.vercel.app
 | Local `test` | Serves `dist/` at `127.0.0.1:4173`, then stops the server. Build first; port must be free. |
 | `test --url …` | Uses the existing app; an authentication page will fail checks. |
 | `test --out path` | Changes the artifact directory. |
-| `test:cli` | Runs failure-path tests with Node's built-in runner; no Chrome required. |
+| `test:cli` | Runs CLI failure-path and shared collision/movement tests with Node's built-in runner and type stripping; no Chrome required. |
 
 Browser tests use isolated sessions and close them on success or failure. Failed assertions or browser startup exit nonzero. **Blocked browser launch is a failed/unverified run, never a pass.**
 
@@ -92,12 +97,12 @@ Inspect `test-results/browser/report.json` and its PNGs:
 Browser checks
 ├── Desktop: 1440 × 1000
 └── Narrow:   412 × 915
-    Each → perspective / floor-plan / ceiling / camera PNGs
+    Each → perspective / floor-plan / ceiling / camera / walkthrough PNGs
 ```
 
-Checks cover geometry draws, label/measurement toggles, 2D/3D camera types, ceiling meshes, camera positioning, pointer orbit, wheel zoom, source trace, horizontal overflow, context loss, page errors and console errors. Optional Google Fonts CSS is stubbed to exclude that third party from CI.
+Checks cover geometry draws, structural window/return state, label/measurement toggles, 2D/3D camera types, ceiling meshes, camera positioning, pointer orbit, wheel zoom, keyboard walkthrough movement, drag-look, held movement pad, reset/exit restoration, historical source trace availability, horizontal overflow, context loss, page errors and console errors. Optional Google Fonts CSS is stubbed to exclude that third party from CI.
 
-Screenshots are review evidence, not approved pixel baselines or proof of architectural accuracy. The narrow profile checks responsive layout, not mobile touch, Safari or physical-device GPU performance.
+Screenshots are review evidence, not approved pixel baselines or proof of architectural accuracy. The narrow profile checks responsive layout and emulated native multi-touch input, not Safari or physical-device GPU performance.
 
 ### Troubleshooting
 

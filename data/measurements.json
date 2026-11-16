@@ -375,7 +375,7 @@
       "height": 2.44,
       "heightRooms": ["bedroom","living","balcony"],
       "status": "estimated",
-      "source": "Owner clarification: bedroom window belongs on the balcony-shared O-P edge; the former door near R remains filled. Start at O to avoid duplicating exterior-13 on N-O."
+      "source": "Owner requests full-span sliding bedroom window from balcony side toward opposite wall end. Existing O-R wall retained; relationship beyond P to living remains provisional and must be checked on site. Start at O to avoid duplicate N-O geometry."
     },
     {
       "id": "bedroom-east",
@@ -394,6 +394,16 @@
       "height": 2.44,
       "heightRooms": ["bathroom","living"],
       "status": "estimated"
+    },
+    {
+      "id": "bathroom-approach-return",
+      "a": "U",
+      "b": "T",
+      "thickness": 0.1,
+      "height": 2.44,
+      "heightRooms": ["living", "kitchen"],
+      "status": "estimated",
+      "source": "Owner reports missing wall outside bathroom; video approximately 00:46-00:52 shows separating return. Mapped provisionally to existing U-T circulation/kitchen edge. Kitchen remains accessible along U-D."
     },
     {
       "id": "bath-east",
@@ -504,13 +514,15 @@
     {
       "id": "bedroom-window",
       "wall": "bedroom-top",
+      "operation": "sliding",
+      "panels": 2,
       "offset": 0.05,
-      "width": 0.76,
+      "width": 2.83,
       "height": 1.2,
       "sill": 0.9,
       "type": "window",
       "status": "estimated",
-      "source": "Owner clarification: window on bedroom/balcony shared edge O-P, replacing the misinterpreted south-wall placement. Provisional width 0.76 m is centered within the traced 0.86 m shared edge; height 1.20 m and sill 0.90 m remain defaults."
+      "source": "Owner full-wall sliding-window clarification, video approximately 00:28-00:35 and 01:28-01:40. Provisional 2.83 m width fills existing 2.93 m O-R wall except 0.05 m jambs. Video supports broad sliding proportions, not exact jamb coordinates or span. Beyond P currently faces living in traced plan; exterior relationship remains unresolved. Two equal overlapping panels, 1.20 m height and 0.90 m sill are visualization defaults."
     }
   ],
   "soffits": [
@@ -715,6 +727,6 @@
     "verified": "Only printed dimensions and area; coordinates are NOT verified",
     "estimated": "Plan page 1 pixel tracing calibrated independently by 3.37, 2.81 and 4.94 m dimensions; coordinates rounded to 0.01 m for editability, not survey precision",
     "default": "Wall thicknesses, door/window sizes, frame profiles and fixture elevations are visualization assumptions. Room heights and soffit undersides are approximate owner measurements, not drawing-verified. Soffit footprints are provisional defaults.",
-    "ownerFeedback": "Owner-confirmed corrections: former bedroom door and west-window locations are solid; bedroom window belongs on balcony-shared edge O-P. The earlier south-wall interpretation was incorrect. Coordinates, window span and door dimensions remain estimated/default."
+    "ownerFeedback": "Former bedroom north-wall door and west-window locations remain rejected. Latest feedback requests a full-span sliding bedroom window toward the opposite end, superseding narrow O-P sizing. Provisional O-R width and U-T bathroom-approach return reflect owner/video interpretation, not drawing-verified measurements. Beyond P, window relation to living/exterior remains unresolved. Heights are approximate owner values; exact geometry needs on-site confirmation."
   }
 }

@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import data from '../data/measurements.json';
 
 type ViewState = {
-  view: '2d' | '3d';
+  view: '2d' | '3d' | 'walk';
   layers: { ceiling: boolean; labels: boolean; measurements: boolean };
 };
 
@@ -26,6 +26,8 @@ export function AutomationBridge(state: ViewState) {
           rooms: data.rooms.map(({ id, name }) => ({ id, name })),
           walls: data.walls.length,
           openings: data.openings.length,
+          bedroomWindow: data.openings.find(o => o.id === 'bedroom-window'),
+          bathroomReturn: data.walls.find(w => w.id === 'bathroom-approach-return'),
           labels: document.querySelectorAll('.room-label:not([hidden])').length,
           dimensions: document.querySelectorAll('.dimension:not([hidden])').length,
           render: {
@@ -38,7 +40,7 @@ export function AutomationBridge(state: ViewState) {
             soffitUndersides: scene.getObjectByName('soffits')?.children.map(object => new THREE.Box3().setFromObject(object).min.y) ?? [],
             contextLost: gl.getContext().isContextLost(),
           },
-          camera: { type: camera.type, position: camera.position.toArray(), target: orbit?.target.toArray(), zoom: camera.zoom },
+          camera: { type: camera.type, position: camera.position.toArray(), rotation: camera.rotation.toArray(), target: orbit?.target.toArray(), zoom: camera.zoom },
           viewport: { width: window.innerWidth, height: window.innerHeight },
           horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
         };
