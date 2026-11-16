@@ -13,3 +13,7 @@ Run npm run validate for polygon simplicity, room edge crossings, positive area,
 public/source-plan.svg is generated from the same data. Compare it to page 1 of the supplied PDF with north at top: west vertical balcony, living north of bedroom, southeast bathroom, east kitchen recess and northeast diagonal dining corner. These landmarks and the three calibration spans were visually compared against the source. Heights cannot be checked from this plan. Room area includes closets/circulation allocated to each polygon and is not equivalent to clear-room dimensions.
 
 Reconstruction sequence: read dimensions; calibrate independently on bedroom width/depth and living width; trace connected boundaries; exclude common corridor and service shafts; add shared walls and openings; check partition area; compare landmarks. Keep a source and confidence entry whenever measurements change.
+
+## Corrected bedroom openings
+
+The owner-rejected north-wall door and west-wall window have been removed. Wall N-R and wall M-N are continuous. Bedroom access uses a new shared wall segment R-S on the existing circulation recess, with a default 0.80 m door centered in its 0.90 m length. The source door swing supports that orientation. The owner-selected window is centered on L-M with provisional dimensions. No perimeter or room polygon coordinates changed. The comparison SVG reflects these same opening assignments.

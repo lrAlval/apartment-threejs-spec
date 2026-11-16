@@ -22,8 +22,18 @@ The traced floor partition covers 38.5623 m², 7.39% below the printed 41.64 m²
 
 ## Openings and fixtures
 
-The entrance is in the living room east wall at its southern end. Bedroom access is at the east end of the bedroom north wall. Bathroom access is from the recessed circulation space. Kitchen north side is open. The balcony opening is modeled as a door plus tall glazing; the drawing suggests sliding aluminium carpentry, whose exact leaf divisions are uncertain. Bedroom west glazing is estimated. No bathroom window is invented: mechanical extraction is indicated.
+The entrance is in the living room east wall at its southern end. Bedroom access is on the short recessed R-S edge beside the bathroom; the door swing in the source plan supports this placement. The previous opening in the north wall was rejected by the owner and has been filled. Bathroom access is from the recessed circulation space. Kitchen north side is open. The balcony opening is modeled as a door plus tall glazing; the drawing suggests sliding aluminium carpentry, whose exact leaf divisions are uncertain. The bedroom west wall is solid, as confirmed by the owner. The bedroom window is now on the opposite/south wall L-M shown in the owner's third annotation. Its 1.75 m width, centered 1.15 m offset from L, 1.20 m height and 0.90 m sill remain provisional. No bathroom window is invented: mechanical extraction is indicated.
 
 Doors are represented by clear gaps and a thin reference rail, not animated leaves. Fixture blocks indicate sink, hob, fridge, washer, laundry sink, toilet, basin and shower locations. Heights are illustrative. No furniture is required for room boundaries.
 
 Before higher fidelity work, verify balcony clear depth, glazing subdivisions, door offsets, bathroom clear size and how 41.64 m² is defined.
+
+## Owner feedback corrections
+
+The three annotated model screenshots take precedence over the initial opening estimates:
+
+- `image.png`: make the north-wall bedroom opening solid. Move access to the existing short R-S circulation edge, where page 1 shows the door swing. The door placement remains drawing-inferred; width/elevation are defaults.
+- `image(1).png`: remove the bedroom window from west wall M-N and restore continuous wall solids.
+- `image(2).png`: place the bedroom window in opposite/south wall L-M. This wall selection is owner-confirmed; centering and window dimensions remain estimates/defaults, not surveyed values.
+
+These corrections do not change room polygons, calibrated dimensions or area. Measurement `source` fields record the evidence without reclassifying owner feedback as drawing-verified dimensions.

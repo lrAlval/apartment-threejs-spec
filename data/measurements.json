@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "metadata": {
-    "apartment": "DPTO 309\u20132009, 2209, 2309, 2509",
+    "apartment": "DPTO 309–2009, 2209, 2309, 2509",
     "source": "Departamento_09_Plano_Con_Cotas.pdf",
     "area": {
       "value": 41.64,
@@ -328,7 +328,8 @@
       "b": "N",
       "thickness": 0.15,
       "height": 2.4,
-      "status": "estimated"
+      "status": "estimated",
+      "source": "Owner annotation image(1).png: the former window is a solid wall."
     },
     {
       "id": "exterior-13",
@@ -352,7 +353,8 @@
       "b": "R",
       "thickness": 0.1,
       "height": 2.4,
-      "status": "estimated"
+      "status": "estimated",
+      "source": "Owner annotation image.png: the former opening is a solid wall."
     },
     {
       "id": "bedroom-east",
@@ -393,6 +395,15 @@
       "thickness": 0.15,
       "height": 2.4,
       "status": "estimated"
+    },
+    {
+      "id": "bedroom-entry",
+      "a": "R",
+      "b": "S",
+      "thickness": 0.1,
+      "height": 2.4,
+      "status": "estimated",
+      "source": "Source PDF page 1: bedroom door swing on the short recessed R-S edge. Placement remains estimated."
     }
   ],
   "openings": [
@@ -412,8 +423,8 @@
     },
     {
       "id": "bedroom-door",
-      "wall": "bedroom-top",
-      "offset": 3.25,
+      "wall": "bedroom-entry",
+      "offset": 0.05,
       "width": 0.8,
       "height": 2.1,
       "sill": 0,
@@ -422,7 +433,8 @@
         "living",
         "bedroom"
       ],
-      "status": "default"
+      "status": "default",
+      "source": "Relocated from the owner-rejected north-wall opening to the R-S recessed edge shown by the source door swing; size remains a visualization default."
     },
     {
       "id": "bath-door",
@@ -464,13 +476,14 @@
     },
     {
       "id": "bedroom-window",
-      "wall": "exterior-12",
-      "offset": 1.0,
+      "wall": "exterior-11",
+      "offset": 1.15,
       "width": 1.75,
       "height": 1.2,
       "sill": 0.9,
       "type": "window",
-      "status": "estimated"
+      "status": "estimated",
+      "source": "Owner annotation image(2).png confirms the south/opposite wall. Centered span is estimated; existing 1.75 m width, 1.20 m height and 0.90 m sill remain provisional."
     }
   ],
   "fixtures": [
@@ -657,6 +670,7 @@
   "provenance": {
     "verified": "Only printed dimensions and area; coordinates are NOT verified",
     "estimated": "Plan page 1 pixel tracing calibrated independently by 3.37, 2.81 and 4.94 m dimensions; coordinates rounded to 0.01 m for editability, not survey precision",
-    "default": "Heights, wall thicknesses, door widths and fixture elevations are visualization assumptions"
+    "default": "Heights, wall thicknesses, door widths and fixture elevations are visualization assumptions",
+    "ownerFeedback": "The three owner-annotated screenshots override the initial opening trace. Wall selection for the bedroom window and solid-wall corrections are owner-confirmed; coordinates, window span and door dimensions retain estimated/default status."
   }
 }
