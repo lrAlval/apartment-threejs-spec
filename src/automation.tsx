@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import data from '../data/measurements.json';
+import { apartment } from './apartment-model';
+const data = apartment.measurements;
 
 type ViewState = {
   view: '2d' | '3d' | 'walk';

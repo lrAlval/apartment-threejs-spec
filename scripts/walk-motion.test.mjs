@@ -1,10 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import { canStandAt, createWalkWorld, EYE_HEIGHT, moveBy, stepWalk, WALK_START, WALK_SPEED } from '../src/walk-motion.ts';
 
-const model = JSON.parse(await readFile(new URL('../data/measurements.json', import.meta.url)));
-const world = createWalkWorld(model);
+
+const world = createWalkWorld();
 const empty = { perimeter: [[-10,-10],[10,-10],[10,10],[-10,10]], barriers: [], fixtures: [] };
 const close = (actual, expected) => assert(Math.abs(actual - expected) < 1e-6, `${actual} != ${expected}`);
 

@@ -1,14 +1,12 @@
 import { useRef, type RefObject } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Vector3 } from 'three';
-import data from '../data/measurements.json';
+import { apartment } from './apartment-model';
 
 type Container = RefObject<HTMLDivElement | null>;
-const points = data.vertices as Record<string, number[]>;
-const rooms = data.rooms.map(room => {
-  const xs = room.polygon.map(id => points[id][0]);
-  const zs = room.polygon.map(id => points[id][1]);
-  return { ...room, bounds: `${(Math.max(...xs) - Math.min(...xs)).toFixed(2)} × ${(Math.max(...zs) - Math.min(...zs)).toFixed(2)}` };
+const rooms = apartment.measurements.rooms.map(room => {
+  const { width, depth } = apartment.roomBounds(room);
+  return { ...room, bounds: `${width.toFixed(2)} × ${depth.toFixed(2)}` };
 });
 
 // Keep labels in the application's single React DOM root. Drei Html creates

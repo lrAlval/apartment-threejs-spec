@@ -3,30 +3,28 @@ import { createRoot } from 'react-dom/client';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, OrthographicCamera, PerspectiveCamera, Line } from '@react-three/drei';
 import * as THREE from 'three';
-import data from '../data/measurements.json';
+import { apartment } from './apartment-model';
 import './style.css';
 import { AutomationBridge } from './automation';
 import { RoomOverlays, ProjectRoomOverlays } from './room-overlays';
 import { newWalkInput, WalkCamera, WalkPanel } from './walkthrough';
-type Point = [number, number];
-const points = data.vertices as unknown as Record<string, Point>;
+const data = apartment.measurements;
 function Soffit({soffit}:{soffit:typeof data.soffits[number]}) {
- const a=points[soffit.a],b=points[soffit.b];
- const top=data.rooms.find(r=>r.id===soffit.room)!.ceiling.height;
- return <Box position={[(a[0]+b[0])/2,(top+soffit.underside)/2,a[1]+soffit.depth/2]} size={[b[0]-a[0],top-soffit.underside,soffit.depth]} color="#e7e3db"/>;
+ const {min,max}=apartment.soffitBox(soffit);
+ return <Box position={min.map((v,i)=>(v+max[i])/2)} size={min.map((v,i)=>max[i]-v)} color="#e7e3db"/>;
 }
 function Slab({ polygon, y=0, color }: {polygon:string[];y?:number;color:string}) {
-  const geometry=useMemo(()=>{const s=new THREE.Shape(); polygon.forEach((id,i)=>{const [x,z]=points[id]; if(i===0)s.moveTo(x,-z);else s.lineTo(x,-z)});s.closePath();return new THREE.ShapeGeometry(s)},[polygon]);
+  const geometry=useMemo(()=>{const s=new THREE.Shape(); apartment.polygon(polygon).forEach(([x,z],i)=>{ if(i===0)s.moveTo(x,-z);else s.lineTo(x,-z)});s.closePath();return new THREE.ShapeGeometry(s)},[polygon]);
   return <mesh geometry={geometry} rotation={[-Math.PI/2,0,0]} position={[0,y,0]}><meshStandardMaterial color={color} side={THREE.DoubleSide}/></mesh>;
 }
 function Box({position,size,color}:{position:number[];size:number[];color:string}) {return <mesh position={position as [number,number,number]}><boxGeometry args={size as [number,number,number]}/><meshStandardMaterial color={color}/></mesh>}
 function Wall({wall,plan}:{wall:typeof data.walls[number];plan:boolean}) {
- const a=points[wall.a],b=points[wall.b],len=Math.hypot(b[0]-a[0],b[1]-a[1]);
- const openings=data.openings.filter(o=>o.wall===wall.id).sort((a,b)=>a.offset-b.offset);
- const pieces:React.ReactNode[]=[];let cursor=0;
+ const axis=apartment.wallAxis(wall);
+ const pieces:React.ReactNode[]=[];
  function piece(start:number,end:number,bottom:number,top:number,key:string){if(end-start<.001||top-bottom<.001)return;pieces.push(<Box key={key} position={[(start+end)/2,(top+bottom)/2,0]} size={[end-start,top-bottom,wall.thickness]} color={wall.id.startsWith('exterior')?'#e7e3db':'#f6f2eb'}/>)}
  const h=plan?.10:wall.height;
- openings.forEach(o=>{piece(cursor,o.offset,0,h,o.id+'a');piece(o.offset,o.offset+o.width,0,Math.min(h,o.sill),o.id+'b');piece(o.offset,o.offset+o.width,o.sill+o.height,h,o.id+'c');cursor=o.offset+o.width;
+ apartment.wallRuns(wall).forEach(run=>piece(run.start,run.end,0,h,'run'+run.start));
+ apartment.openingsOf(wall).forEach(o=>{piece(o.offset,o.offset+o.width,0,Math.min(h,o.sill),o.id+'b');piece(o.offset,o.offset+o.width,o.sill+o.height,h,o.id+'c');
  if(!plan){
  const framed=o.type==='window'||wall.id==='balcony-glazing',f=data.defaults.frameWidth,d=data.defaults.frameDepth;
  if(framed)pieces.push(<group key={o.id+'frame'}>{[o.offset+f/2,o.offset+o.width-f/2].map(x=><Box key={x} position={[x,o.sill+o.height/2,0]} size={[f,o.height,d]} color="#608e99"/>)}{[o.sill+f/2,o.sill+o.height-f/2].map(y=><Box key={y} position={[o.offset+o.width/2,y,0]} size={[o.width,f,d]} color="#608e99"/>)}</group>);
@@ -39,8 +37,8 @@ function Wall({wall,plan}:{wall:typeof data.walls[number];plan:boolean}) {
   return <group key={i} position={[x,o.sill+o.height/2,z]}><mesh><boxGeometry args={[width,o.height,.012]}/><meshStandardMaterial color="#a8d1db" transparent opacity={.22}/></mesh>{panels>1&&[-1,1].map(side=><Box key={side} position={[side*(width-f)/2,0,0]} size={[f,o.height,d]} color="#608e99"/>)}{panels>1&&[-1,1].map(side=><Box key={'track'+side} position={[0,side*(o.height-f)/2,0]} size={[width,f,d]} color="#608e99"/>)}</group>;
  })}</group>);
 }
- });piece(cursor,len,0,h,'end');
- return <group position={[a[0],0,a[1]]} rotation={[0,-Math.atan2(b[1]-a[1],b[0]-a[0]),0]}>{pieces}</group>
+ });
+ return <group position={[axis.a[0],0,axis.a[1]]} rotation={[0,-axis.angle,0]}>{pieces}</group>
 }
 function App() {
  const overlays=useRef<HTMLDivElement>(null);
@@ -86,7 +84,7 @@ function App() {
      {(!plan||walk)&&data.fixtures.map(f=><group key={f.id}><Box position={f.position} size={f.size} color={f.kind==='hob'?'#484d4a':'#f5f5ef'}/>{f.kind==='sink'&&<Box position={[f.position[0],f.size[1]+.01,f.position[2]]} size={[f.size[0]*.7,.025,f.size[2]*.7]} color="#91a5aa"/>}</group>)}
      {(!plan||walk)&&<group name="soffits">{data.soffits.map(s=><Soffit key={s.id} soffit={s}/>)}</group>}
      {effectiveCeiling&&(!plan||walk)&&<group name="ceiling">{data.rooms.map(r=><Slab key={r.id} polygon={r.polygon} y={r.ceiling.height} color="#faf7ef"/>)}</group>}
-     <Line points={data.perimeter.concat(data.perimeter[0]).map(id=>[points[id][0],.015,points[id][1]])} color="#6d756c" lineWidth={1}/>
+     <Line points={apartment.polygon(data.perimeter.concat(data.perimeter[0])).map(([x,z])=>[x,.015,z] as [number,number,number])} color="#6d756c" lineWidth={1}/>
     </group>
     {!walk&&<gridHelper args={[20,20,'#d4d6cf','#e1e2dc']} position={[4,-.05,3]}/>}
    </Canvas>
