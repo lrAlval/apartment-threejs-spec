@@ -16,7 +16,7 @@ npm run apartment -- <command> [arguments] [options]
 
   open                         Open --url (default http://127.0.0.1:5173)
   inspect                      Read model, UI, camera and WebGL render status
-  view 2d|3d                   Select the view through the UI
+  view 2d|3d|walk              Select the view through the UI
   layer ceiling|labels|measurements on|off
   camera <x> <y> <z>           Position the 3D camera in metres
   screenshot [path]            Save the current viewport
@@ -64,12 +64,18 @@ export async function createClient(session, headed = false) {
   return {
     browser, evaluate, wait, ready, inspect,
     async view(mode) {
-      if (!['2d', '3d'].includes(mode)) throw new Error('view requires 2d or 3d');
-      await browser('find', 'role', 'button', 'click', '--name', mode === '2d' ? '2D floor plan' : '3D perspective');
+      if (!['2d', '3d', 'walk'].includes(mode)) throw new Error('view requires 2d, 3d or walk');
+      if ((await inspect()).view === 'walk') {
+        if (mode === 'walk') return inspect();
+        await browser('find', 'role', 'button', 'click', '--name', 'Exit walkthrough');
+        await settled("window.apartment.getState().view !== 'walk'");
+      }
+      await browser('find', 'role', 'button', 'click', '--name', mode === 'walk' ? 'Walk inside' : mode === '2d' ? '2D floor plan' : '3D perspective');
       return settled(`window.apartment.getState().view === ${JSON.stringify(mode)}`);
     },
     async layer(name, value) {
       if (!layerNames[name] || !['on', 'off'].includes(value)) throw new Error('layer requires ceiling|labels|measurements and on|off');
+      if ((await inspect()).view === 'walk') throw new Error('Exit walkthrough before changing layers');
       if ((await inspect()).layers[name] !== (value === 'on')) {
         await browser('find', 'label', layerNames[name], 'click');
       }

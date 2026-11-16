@@ -2,3 +2,5 @@ node_modules/
 dist/
 test-results/
 .vercel/
+/local-review/
+/flat.mp4
