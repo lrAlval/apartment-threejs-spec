@@ -1,0 +1,10 @@
+// View mode: which of the three views is active, and what each view shows. Pure.
+export type View = '3d' | '2d' | 'walk';
+export type Layers = { ceiling: boolean; labels: boolean; measurements: boolean };
+
+export function visibility(view: View, chosen: Layers) {
+  const walk = view === 'walk', plan = view === '2d';
+  // Walking forces the ceiling on and hides annotation; the plan never draws a ceiling.
+  const layers = { ceiling: chosen.ceiling || walk, labels: chosen.labels && !walk, measurements: chosen.measurements && !walk };
+  return { layers, ceilingMesh: layers.ceiling && !plan, interior: !plan, planWalls: plan, grid: !walk };
+}

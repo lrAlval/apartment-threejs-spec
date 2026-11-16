@@ -10,7 +10,7 @@
     "validate": "node scripts/validate.mjs",
     "test:e2e": "node scripts/apartment.mjs test",
     "apartment": "node scripts/apartment.mjs",
-    "test:cli": "node --experimental-strip-types --test scripts/browser-smoke.test.mjs scripts/walk-motion.test.mjs scripts/apartment-model.test.mjs"
+    "test:cli": "node --experimental-strip-types --test scripts/browser-smoke.test.mjs scripts/walk-motion.test.mjs scripts/apartment-model.test.mjs scripts/view-mode.test.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.0",

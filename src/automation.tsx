@@ -2,10 +2,11 @@ import { useEffect, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { apartment } from './apartment-model';
+import type { View } from './view-mode';
 const data = apartment.measurements;
 
 type ViewState = {
-  view: '2d' | '3d' | 'walk';
+  view: View;
   layers: { ceiling: boolean; labels: boolean; measurements: boolean };
 };
 

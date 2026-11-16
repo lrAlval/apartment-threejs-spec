@@ -7,6 +7,7 @@ import { apartment } from './apartment-model';
 import './style.css';
 import { AutomationBridge } from './automation';
 import { RoomOverlays, ProjectRoomOverlays } from './room-overlays';
+import { visibility, type View } from './view-mode';
 import { newWalkInput, WalkCamera, WalkPanel } from './walkthrough';
 const data = apartment.measurements;
 function Soffit({soffit}:{soffit:typeof data.soffits[number]}) {
@@ -46,16 +47,19 @@ function App() {
  const overviewControls=useRef<React.ComponentRef<typeof OrbitControls>>(null);
  const overview=useRef({position:[11,10,13] as [number,number,number],target:[3.8,0,3] as [number,number,number]});
  const input=useRef(newWalkInput());
- const [plan,setPlan]=useState(false),[walk,setWalk]=useState(false),[reset,setReset]=useState(0);
+ const [view,setView]=useState<View>('3d'),[reset,setReset]=useState(0);
+ const returnView=useRef<View>('3d');
+ const plan=view==='2d',walk=view==='walk';
  const [ceiling,setCeiling]=useState(false),[labels,setLabels]=useState(true),[dimensions,setDimensions]=useState(false);
  function enterWalk() {
-  if(!plan&&overviewCamera.current&&overviewControls.current){
+  if(walk)return;
+  returnView.current=view;
+  if(view==='3d'&&overviewCamera.current&&overviewControls.current){
    overview.current={position:overviewCamera.current.position.toArray(),target:overviewControls.current.target.toArray()};
   }
-  setWalk(true);
+  setView('walk');
  }
- function selectView(isPlan:boolean){setWalk(false);setPlan(isPlan);}
- const effectiveCeiling=ceiling||walk,effectiveLabels=labels&&!walk,effectiveDimensions=dimensions&&!walk;
+ const visible=visibility(view,{ceiling,labels,measurements:dimensions});
  return <main className={walk?'walking':undefined}>
   <aside>
    <div className="eyebrow">ARCHITECTURAL STUDY / 01</div>
@@ -63,7 +67,7 @@ function App() {
    <p className="intro">Explore the shared geometry of your home. A measured starting point, ready to refine.</p>
    <div className="stats"><div><strong>41.64 <small>m²</small></strong><span>Printed total area</span></div><div><strong>2.10–2.44 <small>m</small></strong><span>Approx. room ceilings</span></div></div>
    <h2>View & layers</h2>
-   <div className="views"><button aria-pressed={!plan&&!walk} onClick={()=>selectView(false)}>3D perspective</button><button aria-pressed={plan&&!walk} onClick={()=>selectView(true)}>2D floor plan</button></div>
+   <div className="views"><button aria-pressed={view==='3d'} onClick={()=>setView('3d')}>3D perspective</button><button aria-pressed={plan} onClick={()=>setView('2d')}>2D floor plan</button></div>
    <button className="walk-entry" onClick={enterWalk}>Walk inside</button>
    {([['Ceiling',ceiling,setCeiling],['Room labels',labels,setLabels],['Measurements',dimensions,setDimensions]] as const).map(([label,value,set])=><label className="toggle" key={label}>{label}<input type="checkbox" checked={value} onChange={e=>set(e.target.checked)}/></label>)}
    <h2>Spaces</h2><div className="legend">{data.rooms.map(r=><div key={r.id}><i style={{background:r.color}}/>{r.name}</div>)}</div>
@@ -76,20 +80,20 @@ function App() {
     <color attach="background" args={['#eeede8']}/><ambientLight intensity={1.4}/><directionalLight position={[2,10,4]} intensity={2}/>
     {walk?<PerspectiveCamera key="walk" makeDefault position={[6.35,1.6,2.35]} fov={65} near={.04}/>:plan?<OrthographicCamera key="plan" makeDefault position={[3.8,14,3]} up={[0,0,-1]} zoom={68}/>:<PerspectiveCamera key="overview" ref={overviewCamera} makeDefault position={overview.current.position} fov={43}/>}
     {walk?<WalkCamera input={input} reset={reset}/>:<OrbitControls ref={overviewControls} makeDefault key={String(plan)} target={plan?[3.8,0,3]:overview.current.target} enableRotate={!plan} minDistance={4} maxDistance={30} minZoom={25} maxZoom={180}/>}
-    <ProjectRoomOverlays container={overlays} plan={plan&&!walk}/>
-    <AutomationBridge view={walk?'walk':plan?'2d':'3d'} layers={{ceiling:effectiveCeiling,labels:effectiveLabels,measurements:effectiveDimensions}}/>
+    <ProjectRoomOverlays container={overlays} plan={plan}/>
+    <AutomationBridge view={view} layers={visible.layers}/>
     <group>
      {data.rooms.map(r=><Slab key={r.id} polygon={r.polygon} color={r.color}/>)}
-     {data.walls.map(w=><Wall key={w.id} wall={w} plan={plan&&!walk}/>)}
-     {(!plan||walk)&&data.fixtures.map(f=><group key={f.id}><Box position={f.position} size={f.size} color={f.kind==='hob'?'#484d4a':'#f5f5ef'}/>{f.kind==='sink'&&<Box position={[f.position[0],f.size[1]+.01,f.position[2]]} size={[f.size[0]*.7,.025,f.size[2]*.7]} color="#91a5aa"/>}</group>)}
-     {(!plan||walk)&&<group name="soffits">{data.soffits.map(s=><Soffit key={s.id} soffit={s}/>)}</group>}
-     {effectiveCeiling&&(!plan||walk)&&<group name="ceiling">{data.rooms.map(r=><Slab key={r.id} polygon={r.polygon} y={r.ceiling.height} color="#faf7ef"/>)}</group>}
+     {data.walls.map(w=><Wall key={w.id} wall={w} plan={visible.planWalls}/>)}
+     {visible.interior&&data.fixtures.map(f=><group key={f.id}><Box position={f.position} size={f.size} color={f.kind==='hob'?'#484d4a':'#f5f5ef'}/>{f.kind==='sink'&&<Box position={[f.position[0],f.size[1]+.01,f.position[2]]} size={[f.size[0]*.7,.025,f.size[2]*.7]} color="#91a5aa"/>}</group>)}
+     {visible.interior&&<group name="soffits">{data.soffits.map(s=><Soffit key={s.id} soffit={s}/>)}</group>}
+     {visible.ceilingMesh&&<group name="ceiling">{data.rooms.map(r=><Slab key={r.id} polygon={r.polygon} y={r.ceiling.height} color="#faf7ef"/>)}</group>}
      <Line points={apartment.polygon(data.perimeter.concat(data.perimeter[0])).map(([x,z])=>[x,.015,z] as [number,number,number])} color="#6d756c" lineWidth={1}/>
     </group>
-    {!walk&&<gridHelper args={[20,20,'#d4d6cf','#e1e2dc']} position={[4,-.05,3]}/>}
+    {visible.grid&&<gridHelper args={[20,20,'#d4d6cf','#e1e2dc']} position={[4,-.05,3]}/>}
    </Canvas>
-   <RoomOverlays container={overlays} labels={effectiveLabels} dimensions={effectiveDimensions}/>
-   {walk?<WalkPanel input={input} onReset={()=>setReset(n=>n+1)} onExit={()=>setWalk(false)}/>:<footer><span>{plan?'Drag to pan · Scroll to zoom':'Drag to orbit · Right drag to pan · Scroll to zoom'}</span><span>1 unit = 1 metre</span></footer>}
+   <RoomOverlays container={overlays} labels={visible.layers.labels} dimensions={visible.layers.measurements}/>
+   {walk?<WalkPanel input={input} onReset={()=>setReset(n=>n+1)} onExit={()=>setView(returnView.current)}/>:<footer><span>{plan?'Drag to pan · Scroll to zoom':'Drag to orbit · Right drag to pan · Scroll to zoom'}</span><span>1 unit = 1 metre</span></footer>}
   </section>
  </main>;
 }createRoot(document.getElementById('root')!).render(<App/>);
