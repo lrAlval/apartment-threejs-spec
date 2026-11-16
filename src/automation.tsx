@@ -34,6 +34,8 @@ export function AutomationBridge(state: ViewState) {
             triangles: gl.info.render.triangles,
             meshes,
             ceilingMeshes: scene.getObjectByName('ceiling')?.children.length ?? 0,
+            ceilingHeights: scene.getObjectByName('ceiling')?.children.map(object => object.position.y) ?? [],
+            soffitUndersides: scene.getObjectByName('soffits')?.children.map(object => new THREE.Box3().setFromObject(object).min.y) ?? [],
             contextLost: gl.getContext().isContextLost(),
           },
           camera: { type: camera.type, position: camera.position.toArray(), target: orbit?.target.toArray(), zoom: camera.zoom },

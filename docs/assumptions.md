@@ -4,7 +4,7 @@ The supplied two-page Departamento_09_Plano_Con_Cotas.pdf is a cropped, enhanced
 
 Verified means supported by the drawing, not field surveyed. Page 2 transcribes 41.64 m² roofed and total, bedroom 3.37 × 2.81 m, living width 4.94 m, dining return 1.24 m, entrance vertical dimension 1.00 m, and passage dimensions 0.69 / 0.70 / 0.50 m. The passage values are contextual references, not confidently assigned to wall endpoints.
 
-Coordinates, door locations, room polygons and fixture footprints are estimated. Ceiling 2.40 m, wall thicknesses, fixture elevations and door sizes are defaults. Decimal coordinate storage does not imply centimetre accuracy.
+Coordinates, door locations, room polygons and fixture footprints are estimated. Room ceilings are approximate owner measurements: living 2.44 m, balcony 2.10 m, main bedroom 2.40 m, bathroom 2.42 m, kitchen 2.43 m. Local soffit undersides near the bathroom, in the kitchen and bedroom are approximately 2.12 m. None are professionally surveyed or drawing-verified. Wall thicknesses, fixture elevations and door sizes remain defaults. Decimal coordinate storage does not imply centimetre accuracy.
 
 The image scale is approximately 159.5 px/m at a 1800px-wide page render: 535/3.37 = 158.8, 448/2.81 = 159.4 and 789/4.94 = 159.7. Differences include line thickness and endpoint selection.
 
@@ -27,6 +27,16 @@ The entrance is in the living room east wall at its southern end. Bedroom access
 Doors are represented by clear gaps and a thin reference rail, not animated leaves. Fixture blocks indicate sink, hob, fridge, washer, laundry sink, toilet, basin and shower locations. Heights are illustrative. No furniture is required for room boundaries.
 
 Before higher fidelity work, verify balcony clear depth, glazing subdivisions, door offsets, bathroom clear size and how 41.64 m² is defined.
+
+## Video review and provisional overhead geometry
+
+`flat.mp4` shows local downstands near the bathroom approach (approximately 01:12-01:22) and bedroom window wall (approximately 01:28-01:40). The owner clarified that 2.12 m is a local minimum, not a replacement for each room's main ceiling. All heights refer to each room's finished floor; no floor level changes are inferred.
+
+Three provisional soffits visualize these clearances: the bathroom approach uses the existing R-U-T-S circulation recess; kitchen uses a 0.20 m deep band south of U-D; bedroom uses a 0.20 m deep band south of N-R. These footprints, widths and continuity are unmeasured defaults, not video-verified dimensions. Confirm on site before refining; do not interpret them as proof of load-bearing beams. Soffits stay visible with the main ceiling hidden in 3D, and are omitted in 2D.
+
+The balcony now has a ceiling at 2.10 m. Shared walls reach the higher adjacent room ceiling; this does not imply equal clear heights on both sides. Parapets remain unchanged. Window and balcony-access perimeter frames use default 25 mm face width and 35 mm depth, inside the existing opening. No unverified panel subdivisions are added. Bedroom opening stays on O-P with existing 0.76 m width, 0.90 m sill and 1.20 m height: the video suggests different proportions, but widening outside this traced shared edge would require evidence for a plan change. Measure window width, sill and head before resizing.
+
+The earlier `docs/images` captures are historical, not current geometry baselines. Use fresh `test-results/browser` captures. Furniture, fixture placement, room footprints and printed dimensions are unchanged.
 
 ## Owner feedback corrections
 

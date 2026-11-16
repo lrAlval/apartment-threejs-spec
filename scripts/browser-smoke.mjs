@@ -57,16 +57,23 @@ export async function runSmoke({ url, out, headed, createClient }) {
         await check('2D camera and rendered floor plan', async () => {
           const state = await client.view('2d');
           assert.equal(state.camera.type, 'OrthographicCamera');
+          assert.deepEqual(state.render.soffitUndersides, []);
           assert(state.render.triangles > 0);
         });
         await capture('floor-plan');
         await check('3D camera and ceiling geometry', async () => {
           assert.equal((await client.view('3d')).camera.type, 'PerspectiveCamera');
-          assert.equal((await client.layer('ceiling', 'on')).render.ceilingMeshes, 4);
+          const { render } = await client.layer('ceiling', 'on');
+          assert.equal(render.ceilingMeshes, 5);
+          assert.deepEqual(render.ceilingHeights, [2.44, 2.4, 2.42, 2.43, 2.1]);
+          assert.equal(render.soffitUndersides.length, 3);
+          assert(render.soffitUndersides.every(y => Math.abs(y - 2.12) < 1e-6));
         });
         await capture('ceiling');
         await check('ceiling and measurements removal', async () => {
-          assert.equal((await client.layer('ceiling', 'off')).render.ceilingMeshes, 0);
+          const { render } = await client.layer('ceiling', 'off');
+          assert.equal(render.ceilingMeshes, 0);
+          assert.equal(render.soffitUndersides.length, 3);
           assert.equal((await client.layer('measurements', 'off')).dimensions, 0);
         });
         await check('agent camera positioning', async () => {

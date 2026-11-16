@@ -27,6 +27,8 @@
     "windowHeight": 1.2,
     "windowSill": 0.9,
     "parapetHeight": 1.2,
+    "frameWidth": 0.025,
+    "frameDepth": 0.035,
     "status": "default"
   },
   "vertices": {
@@ -135,6 +137,7 @@
   "rooms": [
     {
       "id": "living",
+      "ceiling": { "height": 2.44, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
       "name": "Living / dining",
       "polygon": [
         "Q",
@@ -156,6 +159,7 @@
     },
     {
       "id": "bedroom",
+      "ceiling": { "height": 2.4, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
       "name": "Main bedroom",
       "polygon": [
         "N",
@@ -174,6 +178,7 @@
     },
     {
       "id": "bathroom",
+      "ceiling": { "height": 2.42, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
       "name": "Bathroom",
       "polygon": [
         "S",
@@ -190,6 +195,7 @@
     },
     {
       "id": "kitchen",
+      "ceiling": { "height": 2.43, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
       "name": "Integrated kitchen",
       "polygon": [
         "U",
@@ -210,6 +216,7 @@
     },
     {
       "id": "balcony",
+      "ceiling": { "height": 2.1, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
       "name": "Balcony",
       "polygon": [
         "A",
@@ -239,7 +246,8 @@
       "a": "B",
       "b": "C",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.44,
+      "heightRooms": ["living"],
       "status": "estimated"
     },
     {
@@ -247,7 +255,8 @@
       "a": "C",
       "b": "D",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.44,
+      "heightRooms": ["living"],
       "status": "estimated"
     },
     {
@@ -255,7 +264,8 @@
       "a": "D",
       "b": "E",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.43,
+      "heightRooms": ["kitchen"],
       "status": "estimated"
     },
     {
@@ -263,7 +273,8 @@
       "a": "E",
       "b": "F",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.43,
+      "heightRooms": ["kitchen"],
       "status": "estimated"
     },
     {
@@ -271,7 +282,8 @@
       "a": "F",
       "b": "G",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.43,
+      "heightRooms": ["kitchen"],
       "status": "estimated"
     },
     {
@@ -279,7 +291,8 @@
       "a": "G",
       "b": "H",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.43,
+      "heightRooms": ["kitchen"],
       "status": "estimated"
     },
     {
@@ -287,7 +300,8 @@
       "a": "H",
       "b": "I",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.43,
+      "heightRooms": ["kitchen"],
       "status": "estimated"
     },
     {
@@ -295,7 +309,8 @@
       "a": "I",
       "b": "J",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.42,
+      "heightRooms": ["bathroom"],
       "status": "estimated"
     },
     {
@@ -303,7 +318,8 @@
       "a": "J",
       "b": "K",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.42,
+      "heightRooms": ["bathroom"],
       "status": "estimated"
     },
     {
@@ -311,7 +327,8 @@
       "a": "K",
       "b": "L",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.42,
+      "heightRooms": ["bathroom"],
       "status": "estimated"
     },
     {
@@ -320,6 +337,7 @@
       "b": "M",
       "thickness": 0.15,
       "height": 2.4,
+      "heightRooms": ["bedroom"],
       "status": "estimated"
     },
     {
@@ -328,6 +346,7 @@
       "b": "N",
       "thickness": 0.15,
       "height": 2.4,
+      "heightRooms": ["bedroom"],
       "status": "estimated",
       "source": "Owner annotation image(1).png: the former window is a solid wall."
     },
@@ -337,6 +356,7 @@
       "b": "O",
       "thickness": 0.15,
       "height": 2.4,
+      "heightRooms": ["bedroom"],
       "status": "estimated"
     },
     {
@@ -352,7 +372,8 @@
       "a": "O",
       "b": "R",
       "thickness": 0.1,
-      "height": 2.4,
+      "height": 2.44,
+      "heightRooms": ["bedroom","living","balcony"],
       "status": "estimated",
       "source": "Owner clarification: bedroom window belongs on the balcony-shared O-P edge; the former door near R remains filled. Start at O to avoid duplicating exterior-13 on N-O."
     },
@@ -361,7 +382,8 @@
       "a": "S",
       "b": "L",
       "thickness": 0.1,
-      "height": 2.4,
+      "height": 2.42,
+      "heightRooms": ["bedroom","bathroom"],
       "status": "estimated"
     },
     {
@@ -369,7 +391,8 @@
       "a": "S",
       "b": "T",
       "thickness": 0.1,
-      "height": 2.4,
+      "height": 2.44,
+      "heightRooms": ["bathroom","living"],
       "status": "estimated"
     },
     {
@@ -377,7 +400,8 @@
       "a": "T",
       "b": "I",
       "thickness": 0.1,
-      "height": 2.4,
+      "height": 2.43,
+      "heightRooms": ["bathroom","kitchen"],
       "status": "estimated"
     },
     {
@@ -385,7 +409,8 @@
       "a": "Q",
       "b": "P",
       "thickness": 0.1,
-      "height": 2.4,
+      "height": 2.44,
+      "heightRooms": ["living","balcony"],
       "status": "estimated"
     },
     {
@@ -393,7 +418,8 @@
       "a": "Q",
       "b": "B",
       "thickness": 0.15,
-      "height": 2.4,
+      "height": 2.44,
+      "heightRooms": ["living"],
       "status": "estimated"
     },
     {
@@ -401,7 +427,8 @@
       "a": "R",
       "b": "S",
       "thickness": 0.1,
-      "height": 2.4,
+      "height": 2.44,
+      "heightRooms": ["bedroom","living"],
       "status": "estimated",
       "source": "Source PDF page 1: bedroom door swing on the short recessed R-S edge. Placement remains estimated."
     }
@@ -484,6 +511,23 @@
       "type": "window",
       "status": "estimated",
       "source": "Owner clarification: window on bedroom/balcony shared edge O-P, replacing the misinterpreted south-wall placement. Provisional width 0.76 m is centered within the traced 0.86 m shared edge; height 1.20 m and sill 0.90 m remain defaults."
+    }
+  ],
+  "soffits": [
+    {
+      "id": "bathroom-approach", "room": "living", "a": "R", "b": "U", "depth": 0.9,
+      "underside": 2.12, "status": "estimated",
+      "source": "Owner approximate minimum 2.12 m; video around 01:12-01:22 shows downstands. Full R-U-T-S recess coverage is a provisional visualization assumption, not a measured footprint."
+    },
+    {
+      "id": "kitchen-entry", "room": "kitchen", "a": "U", "b": "D", "depth": 0.2,
+      "underside": 2.12, "status": "estimated",
+      "source": "Owner approximate minimum 2.12 m. North-edge placement and 0.20 m depth are unmeasured visualization defaults; confirm location and width on site."
+    },
+    {
+      "id": "bedroom-window-wall", "room": "bedroom", "a": "N", "b": "R", "depth": 0.2,
+      "underside": 2.12, "status": "estimated",
+      "source": "Owner approximate minimum 2.12 m; video around 01:28-01:40 shows a window-side downstand. Full N-R span and 0.20 m depth are unmeasured visualization defaults."
     }
   ],
   "fixtures": [
@@ -670,7 +714,7 @@
   "provenance": {
     "verified": "Only printed dimensions and area; coordinates are NOT verified",
     "estimated": "Plan page 1 pixel tracing calibrated independently by 3.37, 2.81 and 4.94 m dimensions; coordinates rounded to 0.01 m for editability, not survey precision",
-    "default": "Heights, wall thicknesses, door widths and fixture elevations are visualization assumptions",
+    "default": "Wall thicknesses, door/window sizes, frame profiles and fixture elevations are visualization assumptions. Room heights and soffit undersides are approximate owner measurements, not drawing-verified. Soffit footprints are provisional defaults.",
     "ownerFeedback": "Owner-confirmed corrections: former bedroom door and west-window locations are solid; bedroom window belongs on balcony-shared edge O-P. The earlier south-wall interpretation was incorrect. Coordinates, window span and door dimensions remain estimated/default."
   }
 }
