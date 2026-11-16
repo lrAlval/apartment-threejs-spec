@@ -1,6 +1,6 @@
 # Apartment 09
 
-Interactive 2D/3D reconstruction of DPTO 309–2009, 2209, 2309, 2509, based on the supplied architectural plan. TypeScript, React Three Fiber, Drei and Vite. No backend.
+Interactive 2D/3D reconstruction of DPTO 09 based on the supplied architectural plan. TypeScript, React Three Fiber, Drei and Vite. No backend.
 
 | 3D interior | 2D floor plan |
 | --- | --- |
