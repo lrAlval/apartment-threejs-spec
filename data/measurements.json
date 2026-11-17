@@ -46,11 +46,11 @@
     ],
     "D": [
       6.97,
-      3.0
+      3
     ],
     "E": [
       7.64,
-      3.0
+      3
     ],
     "F": [
       7.64,
@@ -86,15 +86,15 @@
     ],
     "N": [
       0,
-      3.0
+      3
     ],
     "O": [
       1.12,
-      3.0
+      3
     ],
     "P": [
       1.98,
-      3.0
+      3
     ],
     "Q": [
       1.98,
@@ -102,7 +102,7 @@
     ],
     "R": [
       4.05,
-      3.0
+      3
     ],
     "S": [
       4.05,
@@ -114,7 +114,7 @@
     ],
     "U": [
       5.25,
-      3.0
+      3
     ]
   },
   "perimeter": [
@@ -137,7 +137,11 @@
   "rooms": [
     {
       "id": "living",
-      "ceiling": { "height": 2.44, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
+      "ceiling": {
+        "height": 2.44,
+        "status": "estimated",
+        "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed."
+      },
       "name": "Living / dining",
       "polygon": [
         "Q",
@@ -159,7 +163,11 @@
     },
     {
       "id": "bedroom",
-      "ceiling": { "height": 2.4, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
+      "ceiling": {
+        "height": 2.4,
+        "status": "estimated",
+        "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed."
+      },
       "name": "Main bedroom",
       "polygon": [
         "N",
@@ -178,7 +186,11 @@
     },
     {
       "id": "bathroom",
-      "ceiling": { "height": 2.42, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
+      "ceiling": {
+        "height": 2.42,
+        "status": "estimated",
+        "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed."
+      },
       "name": "Bathroom",
       "polygon": [
         "S",
@@ -195,7 +207,11 @@
     },
     {
       "id": "kitchen",
-      "ceiling": { "height": 2.43, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
+      "ceiling": {
+        "height": 2.43,
+        "status": "estimated",
+        "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed."
+      },
       "name": "Integrated kitchen",
       "polygon": [
         "U",
@@ -216,7 +232,11 @@
     },
     {
       "id": "balcony",
-      "ceiling": { "height": 2.1, "status": "estimated", "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed." },
+      "ceiling": {
+        "height": 2.1,
+        "status": "estimated",
+        "source": "Owner approximate finished-floor to ceiling measurement; not professionally surveyed."
+      },
       "name": "Balcony",
       "polygon": [
         "A",
@@ -247,7 +267,9 @@
       "b": "C",
       "thickness": 0.15,
       "height": 2.44,
-      "heightRooms": ["living"],
+      "heightRooms": [
+        "living"
+      ],
       "status": "estimated"
     },
     {
@@ -256,7 +278,9 @@
       "b": "D",
       "thickness": 0.15,
       "height": 2.44,
-      "heightRooms": ["living"],
+      "heightRooms": [
+        "living"
+      ],
       "status": "estimated"
     },
     {
@@ -265,7 +289,9 @@
       "b": "E",
       "thickness": 0.15,
       "height": 2.43,
-      "heightRooms": ["kitchen"],
+      "heightRooms": [
+        "kitchen"
+      ],
       "status": "estimated"
     },
     {
@@ -274,7 +300,9 @@
       "b": "F",
       "thickness": 0.15,
       "height": 2.43,
-      "heightRooms": ["kitchen"],
+      "heightRooms": [
+        "kitchen"
+      ],
       "status": "estimated"
     },
     {
@@ -283,7 +311,9 @@
       "b": "G",
       "thickness": 0.15,
       "height": 2.43,
-      "heightRooms": ["kitchen"],
+      "heightRooms": [
+        "kitchen"
+      ],
       "status": "estimated"
     },
     {
@@ -292,7 +322,9 @@
       "b": "H",
       "thickness": 0.15,
       "height": 2.43,
-      "heightRooms": ["kitchen"],
+      "heightRooms": [
+        "kitchen"
+      ],
       "status": "estimated"
     },
     {
@@ -301,7 +333,9 @@
       "b": "I",
       "thickness": 0.15,
       "height": 2.43,
-      "heightRooms": ["kitchen"],
+      "heightRooms": [
+        "kitchen"
+      ],
       "status": "estimated"
     },
     {
@@ -310,7 +344,9 @@
       "b": "J",
       "thickness": 0.15,
       "height": 2.42,
-      "heightRooms": ["bathroom"],
+      "heightRooms": [
+        "bathroom"
+      ],
       "status": "estimated"
     },
     {
@@ -319,7 +355,9 @@
       "b": "K",
       "thickness": 0.15,
       "height": 2.42,
-      "heightRooms": ["bathroom"],
+      "heightRooms": [
+        "bathroom"
+      ],
       "status": "estimated"
     },
     {
@@ -328,7 +366,9 @@
       "b": "L",
       "thickness": 0.15,
       "height": 2.42,
-      "heightRooms": ["bathroom"],
+      "heightRooms": [
+        "bathroom"
+      ],
       "status": "estimated"
     },
     {
@@ -337,7 +377,9 @@
       "b": "M",
       "thickness": 0.15,
       "height": 2.4,
-      "heightRooms": ["bedroom"],
+      "heightRooms": [
+        "bedroom"
+      ],
       "status": "estimated"
     },
     {
@@ -346,7 +388,9 @@
       "b": "N",
       "thickness": 0.15,
       "height": 2.4,
-      "heightRooms": ["bedroom"],
+      "heightRooms": [
+        "bedroom"
+      ],
       "status": "estimated",
       "source": "Owner annotation image(1).png: the former window is a solid wall."
     },
@@ -356,7 +400,9 @@
       "b": "O",
       "thickness": 0.15,
       "height": 2.4,
-      "heightRooms": ["bedroom"],
+      "heightRooms": [
+        "bedroom"
+      ],
       "status": "estimated"
     },
     {
@@ -373,9 +419,13 @@
       "b": "R",
       "thickness": 0.1,
       "height": 2.44,
-      "heightRooms": ["bedroom","living","balcony"],
+      "heightRooms": [
+        "bedroom",
+        "living",
+        "balcony"
+      ],
       "status": "estimated",
-      "source": "Owner requests full-span sliding bedroom window from balcony side toward opposite wall end. Existing O-R wall retained; relationship beyond P to living remains provisional and must be checked on site. Start at O to avoid duplicate N-O geometry."
+      "source": "Existing O-R wall; window on O-P only (see bedroom-window). Start at O to avoid duplicate N-O geometry."
     },
     {
       "id": "bedroom-east",
@@ -383,7 +433,10 @@
       "b": "L",
       "thickness": 0.1,
       "height": 2.42,
-      "heightRooms": ["bedroom","bathroom"],
+      "heightRooms": [
+        "bedroom",
+        "bathroom"
+      ],
       "status": "estimated"
     },
     {
@@ -392,7 +445,10 @@
       "b": "T",
       "thickness": 0.1,
       "height": 2.44,
-      "heightRooms": ["bathroom","living"],
+      "heightRooms": [
+        "bathroom",
+        "living"
+      ],
       "status": "estimated"
     },
     {
@@ -401,7 +457,10 @@
       "b": "T",
       "thickness": 0.1,
       "height": 2.44,
-      "heightRooms": ["living", "kitchen"],
+      "heightRooms": [
+        "living",
+        "kitchen"
+      ],
       "status": "estimated",
       "source": "Owner reports missing wall outside bathroom; video approximately 00:46-00:52 shows separating return. Mapped provisionally to existing U-T circulation/kitchen edge. Kitchen remains accessible along U-D."
     },
@@ -411,7 +470,10 @@
       "b": "I",
       "thickness": 0.1,
       "height": 2.43,
-      "heightRooms": ["bathroom","kitchen"],
+      "heightRooms": [
+        "bathroom",
+        "kitchen"
+      ],
       "status": "estimated"
     },
     {
@@ -420,7 +482,10 @@
       "b": "P",
       "thickness": 0.1,
       "height": 2.44,
-      "heightRooms": ["living","balcony"],
+      "heightRooms": [
+        "living",
+        "balcony"
+      ],
       "status": "estimated"
     },
     {
@@ -429,7 +494,9 @@
       "b": "B",
       "thickness": 0.15,
       "height": 2.44,
-      "heightRooms": ["living"],
+      "heightRooms": [
+        "living"
+      ],
       "status": "estimated"
     },
     {
@@ -438,9 +505,24 @@
       "b": "S",
       "thickness": 0.1,
       "height": 2.44,
-      "heightRooms": ["bedroom","living"],
+      "heightRooms": [
+        "bedroom",
+        "living"
+      ],
       "status": "estimated",
       "source": "Source PDF page 1: bedroom door swing on the short recessed R-S edge. Placement remains estimated."
+    },
+    {
+      "id": "bathroom-hall-front",
+      "a": "R",
+      "b": "U",
+      "thickness": 0.1,
+      "height": 2.44,
+      "heightRooms": [
+        "living"
+      ],
+      "status": "estimated",
+      "source": "Video approximately 00:46-00:52 and 01:12-01:22 shows a cased doorway into a short hall serving bathroom (ahead) and bedroom (side). Mapped to the R-U line of the existing recess; position not measured."
     }
   ],
   "openings": [
@@ -505,7 +587,7 @@
       "id": "living-glass",
       "wall": "balcony-glazing",
       "offset": 0.08,
-      "width": 2.0,
+      "width": 2,
       "height": 2.1,
       "sill": 0,
       "type": "window",
@@ -517,28 +599,71 @@
       "operation": "sliding",
       "panels": 2,
       "offset": 0.05,
-      "width": 2.83,
+      "width": 0.76,
       "height": 1.2,
       "sill": 0.9,
       "type": "window",
       "status": "estimated",
-      "source": "Owner full-wall sliding-window clarification, video approximately 00:28-00:35 and 01:28-01:40. Provisional 2.83 m width fills existing 2.93 m O-R wall except 0.05 m jambs. Video supports broad sliding proportions, not exact jamb coordinates or span. Beyond P currently faces living in traced plan; exterior relationship remains unresolved. Two equal overlapping panels, 1.20 m height and 0.90 m sill are visualization defaults."
+      "source": "Owner choice (2026-11-17): window runs N-P as one band split by the pier at O; N-O faces exterior, O-P faces the balcony, P-R stays solid wall because living lies beyond it. Video approximately 00:28-00:35 and 01:28-01:40 shows window, pier, then open air. Spans are traced-wall lengths minus 0.05 m jambs, not measured; 1.20 m height, 0.90 m sill and two panels are visualization defaults."
+    },
+    {
+      "id": "bedroom-window-exterior",
+      "wall": "exterior-13",
+      "operation": "sliding",
+      "panels": 2,
+      "offset": 0.05,
+      "width": 1.02,
+      "height": 1.2,
+      "sill": 0.9,
+      "type": "window",
+      "status": "estimated",
+      "source": "Owner choice (2026-11-17): window runs N-P as one band split by the pier at O; N-O faces exterior, O-P faces the balcony, P-R stays solid wall because living lies beyond it. Video approximately 00:28-00:35 and 01:28-01:40 shows window, pier, then open air. Spans are traced-wall lengths minus 0.05 m jambs, not measured; 1.20 m height, 0.90 m sill and two panels are visualization defaults."
+    },
+    {
+      "id": "bathroom-hall-entry",
+      "wall": "bathroom-hall-front",
+      "offset": 0.15,
+      "width": 0.9,
+      "height": 2.1,
+      "sill": 0,
+      "type": "door",
+      "connects": [
+        "living",
+        "living"
+      ],
+      "status": "default",
+      "source": "Doorless cased opening seen in video; 0.90 m width and 0.15 m offset are visualization defaults."
     }
   ],
   "soffits": [
     {
-      "id": "bathroom-approach", "room": "living", "a": "R", "b": "U", "depth": 0.9,
-      "underside": 2.12, "status": "estimated",
+      "id": "bathroom-approach",
+      "room": "living",
+      "a": "R",
+      "b": "U",
+      "depth": 0.9,
+      "underside": 2.12,
+      "status": "estimated",
       "source": "Owner approximate minimum 2.12 m; video around 01:12-01:22 shows downstands. Full R-U-T-S recess coverage is a provisional visualization assumption, not a measured footprint."
     },
     {
-      "id": "kitchen-entry", "room": "kitchen", "a": "U", "b": "D", "depth": 0.2,
-      "underside": 2.12, "status": "estimated",
+      "id": "kitchen-entry",
+      "room": "kitchen",
+      "a": "U",
+      "b": "D",
+      "depth": 0.2,
+      "underside": 2.12,
+      "status": "estimated",
       "source": "Owner approximate minimum 2.12 m. North-edge placement and 0.20 m depth are unmeasured visualization defaults; confirm location and width on site."
     },
     {
-      "id": "bedroom-window-wall", "room": "bedroom", "a": "N", "b": "R", "depth": 0.2,
-      "underside": 2.12, "status": "estimated",
+      "id": "bedroom-window-wall",
+      "room": "bedroom",
+      "a": "N",
+      "b": "R",
+      "depth": 0.2,
+      "underside": 2.12,
+      "status": "estimated",
       "source": "Owner approximate minimum 2.12 m; video around 01:28-01:40 shows a window-side downstand. Full N-R span and 0.20 m depth are unmeasured visualization defaults."
     }
   ],
@@ -670,6 +795,125 @@
       ],
       "kind": "shower",
       "status": "estimated"
+    },
+    {
+      "id": "wardrobe",
+      "room": "bedroom",
+      "position": [
+        3.71,
+        1.05,
+        4.45
+      ],
+      "size": [
+        0.56,
+        2.1,
+        1
+      ],
+      "kind": "cabinet",
+      "status": "estimated",
+      "source": "flatv2.mp4 approximately 3:30-4:30 shows a two-door full-height wardrobe directly beside the bedroom door, about two door-leaf widths long; overhead cabinets continue along the wall above the bed (not modelled). Length scaled from the leaves and depth from the traced gap east of the printed 3.37 m clear width; neither is measured."
+    },
+    {
+      "id": "kitchen-upper-cabinets",
+      "room": "kitchen",
+      "position": [
+        5.535,
+        1.85,
+        4.5
+      ],
+      "size": [
+        0.35,
+        0.7,
+        1.4
+      ],
+      "kind": "cabinet",
+      "status": "estimated",
+      "source": "flatv2.mp4 approximately 0:00-1:10 shows wall cabinets above the hob counter run, not above the main sink (microwave shelf there). Mounted 1.50-2.20 m against the T-I wall within the counter footprint; height, depth and length are visualization defaults, not measured."
+    },
+    {
+      "id": "kitchen-west-base-infill",
+      "room": "kitchen",
+      "position": [
+        5.65,
+        0.45,
+        5.013
+      ],
+      "size": [
+        0.58,
+        0.9,
+        0.275
+      ],
+      "kind": "cabinet",
+      "status": "estimated",
+      "source": "flatv2.mp4 approximately 0:00-1:10: west counter run is continuous from the main sink past the hob to the washer. Sizes and positions are visualization defaults, not measured."
+    },
+    {
+      "id": "kitchen-east-base",
+      "room": "kitchen",
+      "position": [
+        6.78,
+        0.45,
+        4.875
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.55
+      ],
+      "kind": "cabinet",
+      "status": "estimated",
+      "source": "flatv2.mp4 approximately 0:00-1:10: short granite counter on the east side between the fridge and the laundry sink. Sizes and positions are visualization defaults, not measured."
+    },
+    {
+      "id": "kitchen-sink-wall-cabinet",
+      "room": "kitchen",
+      "position": [
+        5.535,
+        1.85,
+        3.35
+      ],
+      "size": [
+        0.35,
+        0.7,
+        0.6
+      ],
+      "kind": "cabinet",
+      "status": "estimated",
+      "source": "flatv2.mp4 approximately 0:00-1:10: wall cabinet with open microwave shelf above the main sink at the living edge. Sizes and positions are visualization defaults, not measured."
+    },
+    {
+      "id": "kitchen-east-wall-cabinet",
+      "room": "kitchen",
+      "position": [
+        6.855,
+        1.85,
+        4.875
+      ],
+      "size": [
+        0.35,
+        0.7,
+        0.55
+      ],
+      "kind": "cabinet",
+      "status": "estimated",
+      "source": "flatv2.mp4 approximately 0:00-1:10: wall cabinet above the east counter beside the fridge. Sizes and positions are visualization defaults, not measured."
+    },
+    {
+      "id": "water-heater",
+      "room": "kitchen",
+      "position": [
+        6.125,
+        1.7,
+        5.735
+      ],
+      "size": [
+        0.35,
+        0.6,
+        0.25
+      ],
+      "kind": "cabinet",
+      "status": "estimated",
+      "source": "flatv2.mp4 approximately 0:00-1:10: wall-mounted water heater on the far wall above the washer/laundry corner. Sizes and positions are visualization defaults, not measured."
     }
   ],
   "balcony": {
@@ -727,6 +971,6 @@
     "verified": "Only printed dimensions and area; coordinates are NOT verified",
     "estimated": "Plan page 1 pixel tracing calibrated independently by 3.37, 2.81 and 4.94 m dimensions; coordinates rounded to 0.01 m for editability, not survey precision",
     "default": "Wall thicknesses, door/window sizes, frame profiles and fixture elevations are visualization assumptions. Room heights and soffit undersides are approximate owner measurements, not drawing-verified. Soffit footprints are provisional defaults.",
-    "ownerFeedback": "Former bedroom north-wall door and west-window locations remain rejected. Latest feedback requests a full-span sliding bedroom window toward the opposite end, superseding narrow O-P sizing. Provisional O-R width and U-T bathroom-approach return reflect owner/video interpretation, not drawing-verified measurements. Beyond P, window relation to living/exterior remains unresolved. Heights are approximate owner values; exact geometry needs on-site confirmation."
+    "ownerFeedback": "Former bedroom north-wall door and west-window locations remain rejected. Bedroom window spans N-P across the O pier (exterior then balcony); P-R is solid because living lies beyond it. Balcony is confirmed rectangular, not L-shaped. Provisional U-T bathroom-approach return reflect owner/video interpretation, not drawing-verified measurements. Heights are approximate owner values; exact geometry needs on-site confirmation."
   }
 }
