@@ -8,14 +8,15 @@ import './style.css';
 import { AutomationBridge } from './automation';
 import { ApartmentScene } from './scene';
 import { RoomOverlays, ProjectRoomOverlays } from './room-overlays';
-import { visibility, type View } from './view-mode';
+import { OVERVIEW_POSE, PLAN_POSE, visibility, type View } from './view-mode';
+import { EYE_HEIGHT, WALK_START } from './walk-motion';
 import { newWalkInput, WalkCamera, WalkPanel } from './walkthrough';
 const data = apartment.measurements;
 function App() {
  const overlays=useRef<HTMLDivElement>(null);
  const overviewCamera=useRef<THREE.PerspectiveCamera>(null);
  const overviewControls=useRef<React.ComponentRef<typeof OrbitControls>>(null);
- const overview=useRef({position:[11,10,13] as [number,number,number],target:[3.8,0,3] as [number,number,number]});
+ const overview=useRef(OVERVIEW_POSE);
  const input=useRef(newWalkInput());
  const [view,setView]=useState<View>('3d'),[reset,setReset]=useState(0);
  const returnView=useRef<View>('3d');
@@ -48,8 +49,8 @@ function App() {
    <div className="view-heading"><span>DPTO 309–2009 · 2209 · 2309 · 2509</span><b>{walk?'WALK / EYE LEVEL':plan?'PLAN / XZ':'PERSPECTIVE'}</b></div>
    <Canvas dpr={[1,2]}>
     <color attach="background" args={['#eeede8']}/><ambientLight intensity={1.4}/><directionalLight position={[2,10,4]} intensity={2}/>
-    {walk?<PerspectiveCamera key="walk" makeDefault position={[6.35,1.6,2.35]} fov={65} near={.04}/>:plan?<OrthographicCamera key="plan" makeDefault position={[3.8,14,3]} up={[0,0,-1]} zoom={68}/>:<PerspectiveCamera key="overview" ref={overviewCamera} makeDefault position={overview.current.position} fov={43}/>}
-    {walk?<WalkCamera input={input} reset={reset}/>:<OrbitControls ref={overviewControls} makeDefault key={String(plan)} target={plan?[3.8,0,3]:overview.current.target} enableRotate={!plan} minDistance={4} maxDistance={30} minZoom={25} maxZoom={180}/>}
+    {walk?<PerspectiveCamera key="walk" makeDefault position={[WALK_START[0],EYE_HEIGHT,WALK_START[1]]} fov={65} near={.04}/>:plan?<OrthographicCamera key="plan" makeDefault position={PLAN_POSE.position} up={[0,0,-1]} zoom={68}/>:<PerspectiveCamera key="overview" ref={overviewCamera} makeDefault position={overview.current.position} fov={43}/>}
+    {walk?<WalkCamera input={input} reset={reset}/>:<OrbitControls ref={overviewControls} makeDefault key={String(plan)} target={plan?PLAN_POSE.target:overview.current.target} enableRotate={!plan} minDistance={4} maxDistance={30} minZoom={25} maxZoom={180}/>}
     <ProjectRoomOverlays container={overlays} plan={plan}/>
     <AutomationBridge view={view} layers={visible.layers}/>
     <ApartmentScene visible={visible}/>

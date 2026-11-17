@@ -58,7 +58,7 @@ Raw element refs last only while their elements survive. Take a fresh snapshot a
 
 ## In-page API
 
-`window.apartment` exposes `version: 1`, `getState()` and `setCamera([x,y,z])`.
+`window.apartment` exposes `version: 1`, `getState()`, `find(collection, id)` (a `rooms`/`walls`/`openings`/`soffits`/`fixtures` record from the Apartment model, or a thrown error) and `setCamera([x,y,z])`.
 
 - State includes rooms, opening/wall counts, view, layers, camera position/target, actual WebGL draw statistics and context health.
 - View/layer CLI commands use the existing UI. `view walk` enters eye-level walkthrough; `view 3d` or `view 2d` exits it. Camera positioning requires overview 3D; layer changes require exiting walkthrough.
