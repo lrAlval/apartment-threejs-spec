@@ -1,11 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import data from '../data/measurements.json';
 import { canStandAt, createWalkWorld, EYE_HEIGHT, stepWalk, WALK_START } from './walk-motion';
 
 export type WalkInput = { keys: Set<string>; touch: Set<string>; yaw: number; pitch: number };
 export const newWalkInput = (): WalkInput => ({ keys: new Set(), touch: new Set(), yaw: Math.PI / 2, pitch: 0 });
-const world = createWalkWorld(data);
+const world = createWalkWorld();
 const movementKeys = ['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
 
 export function WalkCamera({ input, reset }: { input: RefObject<WalkInput>; reset: number }) {

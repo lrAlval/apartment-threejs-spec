@@ -101,11 +101,12 @@ export async function runSmoke({ url, out, headed, createClient }) {
         });
         await capture('camera');
         await check('full-span sliding bedroom window and bathroom approach return', async () => {
-          const state = await client.inspect();
-          assert.equal(state.bedroomWindow.operation, 'sliding');
-          assert.equal(state.bedroomWindow.panels, 2);
-          assert(Math.abs(state.bedroomWindow.width - 2.83) < 1e-6);
-          assert.equal(state.bathroomReturn.a, 'U'); assert.equal(state.bathroomReturn.b, 'T');
+          const opening = await client.evaluate("window.apartment.find('openings','bedroom-window')");
+          const wall = await client.evaluate("window.apartment.find('walls','bathroom-approach-return')");
+          assert.equal(opening.operation, 'sliding');
+          assert.equal(opening.panels, 2);
+          assert(Math.abs(opening.width - 2.83) < 1e-6);
+          assert.equal(wall.a, 'U'); assert.equal(wall.b, 'T');
         });
         await check('eye-level walkthrough, keyboard movement, reset and overview restoration', async () => {
           // Remount controls to discard momentum from the preceding orbit/zoom test.

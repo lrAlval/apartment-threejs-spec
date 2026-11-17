@@ -10,14 +10,16 @@
     "validate": "node scripts/validate.mjs",
     "test:e2e": "node scripts/apartment.mjs test",
     "apartment": "node scripts/apartment.mjs",
-    "test:cli": "node --experimental-strip-types --test scripts/browser-smoke.test.mjs scripts/walk-motion.test.mjs"
+    "test:cli": "node --experimental-strip-types --test scripts/browser-smoke.test.mjs scripts/walk-motion.test.mjs scripts/apartment-model.test.mjs scripts/view-mode.test.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.0",
+    "@xstate/react": "^6.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "three": "^0.180.0"
+    "three": "^0.180.0",
+    "xstate": "^5.33.4"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",

@@ -1,10 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import data from '../data/measurements.json';
+import { apartment } from './apartment-model';
+import type { View } from './view-mode';
+const data = apartment.measurements;
 
+type Collection = 'rooms' | 'walls' | 'openings' | 'soffits' | 'fixtures';
 type ViewState = {
-  view: '2d' | '3d' | 'walk';
+  view: View;
   layers: { ceiling: boolean; labels: boolean; measurements: boolean };
 };
 
@@ -26,8 +29,6 @@ export function AutomationBridge(state: ViewState) {
           rooms: data.rooms.map(({ id, name }) => ({ id, name })),
           walls: data.walls.length,
           openings: data.openings.length,
-          bedroomWindow: data.openings.find(o => o.id === 'bedroom-window'),
-          bathroomReturn: data.walls.find(w => w.id === 'bathroom-approach-return'),
           labels: document.querySelectorAll('.room-label:not([hidden])').length,
           dimensions: document.querySelectorAll('.dimension:not([hidden])').length,
           render: {
@@ -44,6 +45,11 @@ export function AutomationBridge(state: ViewState) {
           viewport: { width: window.innerWidth, height: window.innerHeight },
           horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
         };
+      },
+      find: (collection: Collection, id: string) => {
+        const record = (data[collection] as { id: string }[] | undefined)?.find(r => r.id === id);
+        if (!record) throw new Error(`No ${collection} record ${id}`);
+        return record;
       },
       setCamera: (position: number[]) => {
         if (state.view !== '3d') throw new Error('Select the 3D view before positioning the camera');
@@ -68,6 +74,7 @@ declare global {
     apartment?: {
       version: number;
       getState(): unknown;
+      find(collection: Collection, id: string): unknown;
       setCamera(position: number[]): void;
     };
   }
