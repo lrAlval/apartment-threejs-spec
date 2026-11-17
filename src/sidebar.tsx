@@ -28,7 +28,7 @@ export function Sidebar({ view, layers, onSelect, onWalk, onLayer }: {
     <div className="legend">{apartment.measurements.rooms.map(r => <div key={r.id}><i style={{ background: r.color }} />{r.name}</div>)}</div>
     <div className="note">
       <strong>Provisional reconstruction</strong>
-      <p>Room heights are approximate owner measurements. Soffit footprints and window proportions are provisional. Full-span bedroom window relationship to balcony/living remains unresolved.</p>
+      <p>Room heights are approximate owner measurements. Soffit footprints and window proportions are provisional. Bedroom window spans the exterior and balcony sides; exact jambs need on-site confirmation.</p>
     </div>
     <a href="/source-plan.svg" target="_blank" rel="noreferrer">Original traced reference ↗</a>
   </aside>;

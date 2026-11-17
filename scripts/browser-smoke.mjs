@@ -100,12 +100,14 @@ export async function runSmoke({ url, out, headed, createClient }) {
           await client.wait(`Math.abs(Math.hypot(...window.apartment.getState().camera.position.map((v,i)=>v-${JSON.stringify(target)}[i]))-${distance})>0.1`);
         });
         await capture('camera');
-        await check('full-span sliding bedroom window and bathroom approach return', async () => {
+        await check('bedroom window split across exterior and balcony and bathroom approach return', async () => {
           const opening = await client.evaluate("window.apartment.find('openings','bedroom-window')");
           const wall = await client.evaluate("window.apartment.find('walls','bathroom-approach-return')");
           assert.equal(opening.operation, 'sliding');
           assert.equal(opening.panels, 2);
-          assert(Math.abs(opening.width - 2.83) < 1e-6);
+          assert(Math.abs(opening.width - 0.76) < 1e-6);
+          const exterior = await client.evaluate("window.apartment.find('openings','bedroom-window-exterior')");
+          assert.equal(exterior.wall, 'exterior-13');
           assert.equal(wall.a, 'U'); assert.equal(wall.b, 'T');
         });
         await check('eye-level walkthrough, keyboard movement, reset and overview restoration', async () => {
